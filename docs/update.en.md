@@ -1,8 +1,11 @@
 ---
 comments: true
+hide:
+  - navigation
+  - toc
 ---
 
-### RECENT UPDATES
+### Recently Update
 
 #### 2022.5.9 release PaddleOCR v2.5, including
 
