@@ -4,7 +4,7 @@
   </p>
 
 <!-- language -->
-[中文](./readme_c.md)| English 
+[中文](./README.md) | English | [العربية](./README_ar.md) | [Español](./README_es.md) | [Français](./README_fr.md) | [日本語](./README_ja.md) | [한국어](./README_ko.md) | [Русский](./README_ru.md) | [繁体中文](./README_zh_TW.md)
 
 <!-- icon -->
 
@@ -22,9 +22,9 @@
 </div>
 
 ## 🚀 Introduction
-Since its initial release, PaddleOCR has gained widespread acclaim across academia, industry, and research communities, thanks to its cutting-edge algorithms and proven performance in real-world applications. It’s already powering popular open-source projects like Umi-OCR, OmniParser, MinerU, and RAGFlow, making it the go-to OCR toolkit for developers worldwide.
+Since its initial release, PaddleOCR has gained widespread acclaim across academia, industry, and research communities, thanks to its cutting-edge algorithms and proven performance in real-world applications. It's already powering popular open-source projects like Umi-OCR, OmniParser, MinerU, and RAGFlow, making it the go-to OCR toolkit for developers worldwide.
 
-On May 20, 2025, the PaddlePaddle team unveiled PaddleOCR 3.0, fully compatible with the official release of the **PaddlePaddle 3.0** framework. This update further **boosts text-recognition accuracy**, adds support for **multiple text-type recognition** and **handwriting recognition**, and meets the growing demand from large-model applications for **high-precision parsing of complex documents**. When combined with the **ERNIE 4.5T**, it significantly enhances key-information extraction accuracy. PaddleOCR 3.0 also introduces support for domestic hardware platforms such as **KUNLUNXIN** and **Ascend**.
+On May 20, 2025, the PaddlePaddle team unveiled PaddleOCR 3.0, fully compatible with the official release of the **PaddlePaddle 3.0** framework. This update further **boosts text-recognition accuracy**, adds support for **multiple text-type recognition** and **handwriting recognition**, and meets the growing demand from large-model applications for **high-precision parsing of complex documents**. When combined with the **ERNIE 4.5T**, it significantly enhances key-information extraction accuracy. PaddleOCR 3.0 also introduces support for domestic hardware platforms such as **KUNLUNXIN** and **Ascend**. For the complete usage documentation, please refer to the [PaddleOCR 3.0 Documentation](https://paddlepaddle.github.io/PaddleOCR/latest/en/index.html).
 
 Three Major New Features in PaddleOCR 3.0:
 - Universal-Scene Text Recognition Model [PP-OCRv5](./docs/version3.x/algorithm/PP-OCRv5/PP-OCRv5.en.md): A single model that handles five different text types plus complex handwriting. Overall recognition accuracy has increased by 13 percentage points over the previous generation. [Online Demo](https://aistudio.baidu.com/community/app/91660/webUI)
@@ -43,6 +43,55 @@ In addition to providing an outstanding model library, PaddleOCR 3.0 also offers
 
 
 ## 📣 Recent updates
+
+#### 🔥🔥**2025.06.19: Release of PaddleOCR 3.0.2, includes:**
+
+- **New Features:**
+
+  - The default download source has been changed from `BOS` to `HuggingFace`. Users can also change the environment variable `PADDLE_PDX_MODEL_SOURCE` to `BOS` to set the model download source back to Baidu Object Storage (BOS).
+  - Added service invocation examples for six languages—C++, Java, Go, C#, Node.js, and PHP—for pipelines like PP-OCRv5, PP-StructureV3, and PP-ChatOCRv4.
+  - Improved the layout partition sorting algorithm in the PP-StructureV3 pipeline, enhancing the sorting logic for complex vertical layouts to deliver better results.
+  - Enhanced model selection logic: when a language is specified but a model version is not, the system will automatically select the latest model version supporting that language. 
+  - Set a default upper limit for MKL-DNN cache size to prevent unlimited growth, while also allowing users to configure cache capacity.
+  - Updated default configurations for high-performance inference to support Paddle MKL-DNN acceleration and optimized the logic for automatic configuration selection for smarter choices.
+  - Adjusted the logic for obtaining the default device to consider the actual support for computing devices by the installed Paddle framework, making program behavior more intuitive.
+  - Added Android example for PP-OCRv5. [Details](https://paddlepaddle.github.io/PaddleOCR/latest/en/version3.x/deployment/on_device_deployment.html).
+
+- **Bug Fixes:**
+
+  - Fixed an issue with some CLI parameters in PP-StructureV3 not taking effect.
+  - Resolved an issue where `export_paddlex_config_to_yaml` would not function correctly in certain cases.
+  - Corrected the discrepancy between the actual behavior of `save_path` and its documentation description.
+  - Fixed potential multithreading errors when using MKL-DNN in basic service deployment.
+  - Corrected channel order errors in image preprocessing for the Latex-OCR model.
+  - Fixed channel order errors in saving visualized images within the text recognition module.
+  - Resolved channel order errors in visualized table results within PP-StructureV3 pipeline.
+  - Fixed an overflow issue in the calculation of `overlap_ratio` under extremely special circumstances in the PP-StructureV3 pipeline.
+
+- **Documentation Improvements:**
+
+  - Updated the description of the `enable_mkldnn` parameter in the documentation to accurately reflect the program's actual behavior.
+  - Fixed errors in the documentation regarding the `lang` and `ocr_version` parameters.
+  - Added instructions for exporting production line configuration files via CLI.
+  - Fixed missing columns in the performance data table for PP-OCRv5.
+  - Refined benchmark metrics for PP-StructureV3 across different configurations.
+
+- **Others:**
+
+  - Relaxed version restrictions on dependencies like numpy and pandas, restoring support for Python 3.12.
+
+<details>
+    <summary><strong>History Log</strong></summary>
+
+#### **2025.06.05: Release of PaddleOCR 3.0.1, includes:**
+
+- **Optimisation of certain models and model configurations:**
+  - Updated the default model configuration for PP-OCRv5, changing both detection and recognition from mobile to server models. To improve default performance in most scenarios, the parameter `limit_side_len` in the configuration has been changed from 736 to 64.
+  - Added a new text line orientation classification model `PP-LCNet_x1_0_textline_ori` with an accuracy of 99.42%. The default text line orientation classifier for OCR, PP-StructureV3, and PP-ChatOCRv4 pipelines has been updated to this model.
+  - Optimised the text line orientation classification model `PP-LCNet_x0_25_textline_ori`, improving accuracy by 3.3 percentage points to a current accuracy of 98.85%.
+
+- **Optimizations and fixes for some issues in version 3.0.0, [details](https://paddlepaddle.github.io/PaddleOCR/latest/en/update/update.html)**
+
 🔥🔥2025.05.20: Official Release of **PaddleOCR v3.0**, including:
 - **PP-OCRv5**: High-Accuracy Text Recognition Model for All Scenarios - Instant Text from Images/PDFs.
    1. 🌐 Single-model support for **five** text types - Seamlessly process **Simplified Chinese, Traditional Chinese, Simplified Chinese Pinyin, English** and **Japanese** within a single model.
@@ -58,20 +107,7 @@ In addition to providing an outstanding model library, PaddleOCR 3.0 also offers
    2. 💻 Native support for **ERINE4.5 Turbo**, with compatibility for large-model deployments via PaddleNLP, Ollama, vLLM, and more.
    3. 🤝 Integrated [PP-DocBee2](https://github.com/PaddlePaddle/PaddleMIX/tree/develop/paddlemix/examples/ppdocbee2), enabling extraction and understanding of printed text, handwriting, seals, tables, charts, and other common elements in complex documents.
 
-<details>
-   <summary><strong>The history of updates </strong></summary>
-
-
-- 🔥🔥2025.03.07: Release of **PaddleOCR v2.10**, including:
-
-  - **12 new self-developed models:**
-    - **[Layout Detection series](https://paddlepaddle.github.io/PaddleX/latest/en/module_usage/tutorials/ocr_modules/layout_detection.html)**(3 models): PP-DocLayout-L, M, and S -- capable of detecting 23 common layout types across diverse document formats(papers, reports, exams, books, magazines, contracts, etc.) in English and Chinese. Achieves up to **90.4% mAP@0.5** , and lightweight features can process over 100 pages per second.
-    - **[Formula Recognition series](https://paddlepaddle.github.io/PaddleX/latest/en/module_usage/tutorials/ocr_modules/formula_recognition.html)**(2 models): PP-FormulaNet-L and S -- supports recognition of 50,000+ LaTeX expressions, handling both printed and handwritten formulas. PP-FormulaNet-L offers **6% higher accuracy** than comparable models; PP-FormulaNet-S is 16x faster while maintaining similar accuracy.
-    - **[Table Structure Recognition series](https://paddlepaddle.github.io/PaddleX/latest/en/module_usage/tutorials/ocr_modules/table_structure_recognition.html)**(2 models): SLANeXt_wired and SLANeXt_wireless -- newly developed models with **6% accuracy improvement** over SLANet_plus in complex table recognition.
-    - **[Table Classification](https://paddlepaddle.github.io/PaddleX/latest/en/module_usage/tutorials/ocr_modules/table_classification.html)**(1 model): 
-PP-LCNet_x1_0_table_cls -- an ultra-lightweight classifier for wired and wireless tables.
-
-[Learn more](https://paddlepaddle.github.io/PaddleOCR/latest/en/update.html)
+[History Log](https://paddlepaddle.github.io/PaddleOCR/latest/en/update/update.html)
 
 </details>
 
@@ -87,7 +123,7 @@ Install PaddlePaddle refer to [Installation Guide](https://www.paddlepaddle.org.
 
 ```bash
 # Install paddleocr
-pip install paddleocr==3.0.0
+pip install paddleocr
 ```
 
 ### 3. Run inference by CLI

@@ -197,7 +197,7 @@ PP-ChatOCRv4 产线中包含<b>版面区域检测模块</b>、<b>表格结构识
 <td>103.08 / 103.08</td>
 <td>197.99 / 197.99</td>
 <td>6.9 M</td>
-<td>SLANet 是百度飞桨视觉团队自研的表格结构识别模型。该模型通过采用CPU 友好型轻量级骨干网络PP-LCNet、高低层特征融合模块CSP-PAN、结构与位置信息对齐的特征解码模块SLA Head，大幅提升了表格结构识别的精度和推理速度。</td>
+<td>SLANet 是百度飞桨视觉团队自研的表格结构识别模型。该模型通过采用CPU 友好型轻量级骨干网络 PP-LCNet、高低层特征融合模块CSP-PAN、结构与位置信息对齐的特征解码模块 SLA Head，大幅提升了表格结构识别的精度和推理速度。</td>
 </tr>
 <tr>
 <td>SLANet_plus</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/SLANet_plus_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/SLANet_plus_pretrained.pdparams">训练模型</a></td>
@@ -785,15 +785,15 @@ paddleocr pp_chatocrv4_doc -i vehicle_certificate-1.png -k 驾驶室准乘人数
 </tr>
 <tr>
 <td><code>save_path</code></td>
-<td>指定推理结果文件保存的路径。如果不设置, 推理结果将不会保存到本地。</td>
+<td>指定推理结果文件保存的路径。如果不设置，推理结果将不会保存到本地。</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>invoke_mllm</code></td>
-<td>是否加载并使用多模态大模型。</td>
+<td>是否加载并使用多模态大模型。如果不设置，将默认使用产线初始化的该参数值，初始化为<code>False</code>。</td>
 <td><code>bool</code></td>
-<td><code>False</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>layout_detection_model_name</code></td>
@@ -936,35 +936,39 @@ paddleocr pp_chatocrv4_doc -i vehicle_certificate-1.png -k 驾驶室准乘人数
 <tr>
 <td><code>layout_threshold</code></td>
 <td>版面模型得分阈值。
-<code>0-1</code> 之间的任意浮点数。如果不设置, 将默认使用产线初始化的该参数值，初始化为 <code>0.5</code>。
+<code>0-1</code> 之间的任意浮点数。如果不设置，将默认使用产线初始化的该参数值，初始化为 <code>0.5</code>。
 </td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
-<td>版面区域检测模型是否使用NMS后处理。</td>
+<td>版面检测是否使用后处理NMS。如果不设置，将默认使用产线初始化的该参数值，初始化为<code>True</code>。</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>layout_unclip_ratio</code></td>
-<td>版面区域检测模型检测框的扩张系数。任意大于 <code>0</code>  浮点数。如果不设置, 将默认使用产线初始化的该参数值，初始化为 <code>1.0</code>。
+<td>版面区域检测模型检测框的扩张系数。任意大于 <code>0</code>  浮点数。如果不设置，将默认使用产线初始化的该参数值，初始化为 <code>1.0</code>。
 </td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>layout_merge_bboxes_mode</code></td>
-<td>版面区域检测的重叠框过滤方式。
-<code>large</code>，<code>small</code>, <code>union</code>，分别表示重叠框过滤时选择保留大框，小框还是同时保留。如果不设置, 将默认使用产线初始化的该参数值，初始化为 <code>large</code>。
+<td>版面检测中模型输出的检测框的合并处理模式。
+<ul>
+<li><b>large</b>，设置为large时，表示在模型输出的检测框中，对于互相重叠包含的检测框，只保留外部最大的框，删除重叠的内部框；</li>
+<li><b>small</b>，设置为small，表示在模型输出的检测框中，对于互相重叠包含的检测框，只保留内部被包含的小框，删除重叠的外部框；</li>
+<li><b>union</b>，不进行框的过滤处理，内外框都保留；</li>
+</ul>如果不设置，将默认使用产线初始化的该参数值，初始化为<code>large</code>。
 </td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>text_det_limit_side_len</code></td>
-<td>文本检测的最大边长度限制。大于 <code>0</code> 的任意整数。如果不设置, 将默认使用产线初始化的该参数值，初始化为 <code>960</code>。
+<td>文本检测的图像边长限制。大于 <code>0</code> 的任意整数。如果不设置，将默认使用产线初始化的该参数值，初始化为 <code>960</code>。
 </td>
 <td><code>int</code></td>
 <td></td>
@@ -972,14 +976,14 @@ paddleocr pp_chatocrv4_doc -i vehicle_certificate-1.png -k 驾驶室准乘人数
 <tr>
 <td><code>text_det_limit_type</code></td>
 <td>文本检测的边长度限制类型。支持 <code>min</code> 和 <code>max</code>，<code>min</code> 表示保证图像最短边不小于 <code>det_limit_side_len</code>，<code>max</code> 表示保证图像最长边不大于 <code>limit_side_len</code></li>
-</ul>如果不设置, 将默认使用产线初始化的该参数值，初始化为 <code>max</code>。
+</ul>如果不设置，将默认使用产线初始化的该参数值，初始化为 <code>max</code>。
 </td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>text_det_thresh</code></td>
-<td>检测像素阈值。输出的概率图中，得分大于该阈值的像素点才会被认为是文字像素点。大于 <code>0</code> 的任意浮点数。如果不设置, 将默认使用产线初始化的该参数值 <code>0.3</code>。
+<td>检测像素阈值。输出的概率图中，得分大于该阈值的像素点才会被认为是文字像素点。大于 <code>0</code> 的任意浮点数。如果不设置，将默认使用产线初始化的该参数值 <code>0.3</code>。
 </td>
 <td><code>float</code></td>
 <td></td>
@@ -987,49 +991,49 @@ paddleocr pp_chatocrv4_doc -i vehicle_certificate-1.png -k 驾驶室准乘人数
 <tr>
 <td><code>text_det_box_thresh</code></td>
 <td>检测框阈值，检测结果边框内，所有像素点的平均得分大于该阈值时，该结果会被认为是文字区域。大于 <code>0</code> 的任意浮点数
-。如果不设置, 将默认使用产线初始化的该参数值 <code>0.6</code>。
+。如果不设置，将默认使用产线初始化的该参数值 <code>0.6</code>。
 </td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>text_det_unclip_ratio</code></td>
-<td>文本检测扩张系数，使用该方法对文字区域进行扩张，该值越大，扩张的面积越大。大于 <code>0</code> 的任意浮点数。如果不设置, 将默认使用产线初始化的该参数值 <code>2.0</code>。
+<td>文本检测扩张系数，使用该方法对文字区域进行扩张，该值越大，扩张的面积越大。大于 <code>0</code> 的任意浮点数。如果不设置，将默认使用产线初始化的该参数值 <code>2.0</code>。
 </td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>text_rec_score_thresh</code></td>
-<td>文本识别阈值，得分大于该阈值的文本结果会被保留。大于 <code>0</code> 的任意浮点数。如果不设置, 将默认使用产线初始化的该参数值 <code>0.0</code>。即不设阈值。
+<td>文本识别阈值，得分大于该阈值的文本结果会被保留。大于 <code>0</code> 的任意浮点数。如果不设置，将默认使用产线初始化的该参数值 <code>0.0</code>。即不设阈值。
 </td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>seal_det_limit_side_len</code></td>
-<td>印章文本检测的图像边长限制。大于 <code>0</code> 的任意整数。如果不设置, 将默认使用产线初始化的该参数值，初始化为 <code>736</code>。
+<td>印章文本检测的图像边长限制。大于 <code>0</code> 的任意整数。如果不设置，将默认使用产线初始化的该参数值，初始化为 <code>736</code>。
 </td>
 <td><code>int</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>seal_det_limit_type</code></td>
-<td>印章文本检测的图像边长限制类型。支持 <code>min</code> 和 <code>max</code>，<code>min</code> 表示保证图像最短边不小于 <code>det_limit_side_len</code>，<code>max</code> 表示保证图像最长边不大于 <code>limit_side_len</code>。如果不设置, 将默认使用产线初始化的该参数值，初始化为 <code>min</code>。
+<td>印章文本检测的图像边长限制类型。支持 <code>min</code> 和 <code>max</code>，<code>min</code> 表示保证图像最短边不小于 <code>det_limit_side_len</code>，<code>max</code> 表示保证图像最长边不大于 <code>limit_side_len</code>。如果不设置，将默认使用产线初始化的该参数值，初始化为 <code>min</code>。
 </td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>seal_det_thresh</code></td>
-<td>检测像素阈值，输出的概率图中，得分大于该阈值的像素点才会被认为是文字像素点。大于 <code>0</code> 的任意浮点数。如果不设置, 将默认使用产线初始化的该参数值 <code>0.2</code>。
+<td>检测像素阈值，输出的概率图中，得分大于该阈值的像素点才会被认为是文字像素点。大于 <code>0</code> 的任意浮点数。如果不设置，将默认使用产线初始化的该参数值 <code>0.2</code>。
 </td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>seal_det_box_thresh</code></td>
-<td>检测框阈值，检测结果边框内，所有像素点的平均得分大于该阈值时，该结果会被认为是文字区域。大于 <code>0</code> 的任意浮点数。如果不设置, 将默认使用产线初始化的该参数值 <code>0.6</code>。
+<td>检测框阈值，检测结果边框内，所有像素点的平均得分大于该阈值时，该结果会被认为是文字区域。大于 <code>0</code> 的任意浮点数。如果不设置，将默认使用产线初始化的该参数值 <code>0.6</code>。
 </td>
 <td><code>float</code></td>
 <td></td>
@@ -1037,7 +1041,7 @@ paddleocr pp_chatocrv4_doc -i vehicle_certificate-1.png -k 驾驶室准乘人数
 <tr>
 <td><code>seal_det_unclip_ratio</code></td>
 <td>印章文本检测扩张系数，使用该方法对文字区域进行扩张，该值越大，扩张的面积越大。大于 <code>0</code> 的任意浮点数
-。如果不设置, 将默认使用产线初始化的该参数值 <code>0.5</code>。
+。如果不设置，将默认使用产线初始化的该参数值 <code>0.5</code>。
 </td>
 <td><code>float</code></td>
 <td></td>
@@ -1045,7 +1049,7 @@ paddleocr pp_chatocrv4_doc -i vehicle_certificate-1.png -k 驾驶室准乘人数
 <tr>
 <td><code>seal_rec_score_thresh</code></td>
 <td>印章文本识别阈值，得分大于该阈值的文本结果会被保留。大于 <code>0</code> 的任意浮点数
-。如果不设置, 将默认使用产线初始化的该参数值 <code>0.0</code>。即不设阈值。
+。如果不设置，将默认使用产线初始化的该参数值 <code>0.0</code>。即不设阈值。
 </td>
 <td><code>float</code></td>
 <td></td>
@@ -1064,7 +1068,7 @@ paddleocr pp_chatocrv4_doc -i vehicle_certificate-1.png -k 驾驶室准乘人数
 </tr>
 <tr>
 <td><code>device</code></td>
-<td>用于推理的设备。支持指定具体卡号。
+<td>用于推理的设备。支持指定具体卡号：
 <ul>
 <li><b>CPU</b>：如 <code>cpu</code> 表示使用 CPU 进行推理；</li>
 <li><b>GPU</b>：如 <code>gpu:0</code> 表示使用第 1 块 GPU 进行推理；</li>
@@ -1072,7 +1076,7 @@ paddleocr pp_chatocrv4_doc -i vehicle_certificate-1.png -k 驾驶室准乘人数
 <li><b>XPU</b>：如 <code>xpu:0</code> 表示使用第 1 块 XPU 进行推理；</li>
 <li><b>MLU</b>：如 <code>mlu:0</code> 表示使用第 1 块 MLU 进行推理；</li>
 <li><b>DCU</b>：如 <code>dcu:0</code> 表示使用第 1 块 DCU 进行推理；</li>
-</ul>如果不设置, 将默认使用产线初始化的该参数值，初始化时，会优先使用本地的 GPU 0号设备，如果没有，则使用 CPU 设备。
+</ul>如果不设置，将默认使用产线初始化的该参数值，初始化时，会优先使用本地的 GPU 0号设备，如果没有，则使用 CPU 设备。
 </td>
 <td><code>str</code></td>
 <td></td>
@@ -1085,15 +1089,12 @@ paddleocr pp_chatocrv4_doc -i vehicle_certificate-1.png -k 驾驶室准乘人数
 </tr>
 <tr>
 <td><code>use_tensorrt</code></td>
-<td>是否使用 TensorRT 进行推理加速。</td>
+<td>是否启用 Paddle Inference 的 TensorRT 子图引擎。</br>
+对于 CUDA 11.8 版本的飞桨，兼容的 TensorRT 版本为 8.x（x>=6），建议安装 TensorRT 8.6.1.6。</br>
+对于 CUDA 12.6 版本的飞桨，兼容的 TensorRT 版本为 10.x（x>=5），建议安装 TensorRT 10.5.0.18。
+</td>
 <td><code>bool</code></td>
 <td><code>False</code></td>
-</tr>
-<tr>
-<td><code>min_subgraph_size</code></td>
-<td>最小子图大小，用于优化模型子图的计算。</td>
-<td><code>int</code></td>
-<td><code>3</code></td>
 </tr>
 <tr>
 <td><code>precision</code></td>
@@ -1103,10 +1104,18 @@ paddleocr pp_chatocrv4_doc -i vehicle_certificate-1.png -k 驾驶室准乘人数
 </tr>
 <tr>
 <td><code>enable_mkldnn</code></td>
-<td>是否启用 MKL-DNN 加速库。
+<td>是否启用 MKL-DNN 加速推理。如果 MKL-DNN 不可用或模型不支持通过 MKL-DNN 加速，即使设置了此标志，也不会使用加速。
 </td>
 <td><code>bool</code></td>
 <td><code>True</code></td>
+</tr>
+<tr>
+<td><code>mkldnn_cache_capacity</code></td>
+<td>
+MKL-DNN 缓存容量。
+</td>
+<td><code>int</code></td>
+<td><code>10</code></td>
 </tr>
 <tr>
 <td><code>cpu_threads</code></td>
@@ -1373,7 +1382,7 @@ PP-ChatOCRv4 预测的流程、API说明、产出说明如下：
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
-<td>版面区域检测模型是否使用NMS后处理。</td>
+<td>版面检测是否使用后处理NMS。如果设置为<code>None</code>，将默认使用产线初始化的该参数值，初始化为<code>True</code>。</td>
 <td><code>bool</code></td>
 <td><code>None</code></td>
 </tr>
@@ -1383,7 +1392,7 @@ PP-ChatOCRv4 预测的流程、API说明、产出说明如下：
 <ul>
 <li><b>float</b>：任意大于 <code>0</code>  浮点数；</li>
 <li><b>Tuple[float,float]</b>：在横纵两个方向各自的扩张系数；</li>
-<li><b>字典</b>，字典的key为<b>int</b>类型，代表<code>cls_id</code>，value为<b>tuple</b>类型，如<code>{0: (1.1，2.0)}</code>，表示将模型输出的第0类别检测框中心不变，宽度扩张1.1倍，高度扩张2.0倍</li>
+<li><b>dict</b>，dict的key为<b>int</b>类型，代表<code>cls_id</code>，value为<b>tuple</b>类型，如<code>{0: (1.1，2.0)}</code>，表示将模型输出的第0类别检测框中心不变，宽度扩张1.1倍，高度扩张2.0倍</li>
 <li><b>None</b>：如果设置为<code>None</code>，将默认使用产线初始化的该参数值，初始化为 <code>1.0</code>。</li>
 </ul>
 </td>
@@ -1395,7 +1404,7 @@ PP-ChatOCRv4 预测的流程、API说明、产出说明如下：
 <td>版面区域检测的重叠框过滤方式。
 <ul>
 <li><b>str</b>：<code>large</code>，<code>small</code>，<code>union</code>，分别表示重叠框过滤时选择保留大框，小框还是同时保留；</li>
-<li><b>dict</b>，字典的key为<b>int</b>类型，代表<code>cls_id</code>，value为<b>str</b>类型，如<code>{0: "large"，2: "small"}</code>，表示对第0类别检测框使用large模式，对第2类别检测框使用small模式；</li>
+<li><b>dict</b>，dict的key为<b>int</b>类型，代表<code>cls_id</code>，value为<b>str</b>类型，如<code>{0: "large"，2: "small"}</code>，表示对第0类别检测框使用large模式，对第2类别检测框使用small模式；</li>
 <li><b>None</b>：如果设置为<code>None</code>，将默认使用产线初始化的该参数值，初始化为 <code>large</code>。</li>
 </ul>
 </td>
@@ -1404,7 +1413,7 @@ PP-ChatOCRv4 预测的流程、API说明、产出说明如下：
 </tr>
 <tr>
 <td><code>text_det_limit_side_len</code></td>
-<td>文本检测的最大边长度限制。
+<td>文本检测的图像边长限制。
 <ul>
 <li><b>int</b>：大于 <code>0</code> 的任意整数；</li>
 <li><b>None</b>：如果设置为<code>None</code>，将默认使用产线初始化的该参数值，初始化为 <code>960</code>。</li>
@@ -1528,7 +1537,7 @@ PP-ChatOCRv4 预测的流程、API说明、产出说明如下：
 </tr>
 <tr>
 <td><code>retriever_config</code></td>
-<td>向量检索大模型配置参数。配置内容为如下字典：
+<td>向量检索大模型配置参数。配置内容为如下dict：
 <pre><code>{
 "module_name": "retriever",
 "model_name": "embedding-v1",
@@ -1542,7 +1551,7 @@ PP-ChatOCRv4 预测的流程、API说明、产出说明如下：
 </tr>
 <tr>
 <td><code>mllm_chat_bot_config</code></td>
-<td>多模态大模型配置参数。配置内容为如下字典：
+<td>多模态大模型配置参数。配置内容为如下dict：
 <pre><code>{
 "module_name": "chat_bot",
 "model_name": "PP-DocBee",
@@ -1556,7 +1565,7 @@ PP-ChatOCRv4 预测的流程、API说明、产出说明如下：
 </tr>
 <tr>
 <td><code>chat_bot_config</code></td>
-<td>大语言模型配置信息。配置内容为如下字典：
+<td>大语言模型配置信息。配置内容为如下dict：
 <pre><code>{
 "module_name": "chat_bot",
 "model_name": "ernie-3.5-8k",
@@ -1570,7 +1579,7 @@ PP-ChatOCRv4 预测的流程、API说明、产出说明如下：
 </tr>
 <tr>
 <td><code>device</code></td>
-<td>用于推理的设备。支持指定具体卡号。
+<td>用于推理的设备。支持指定具体卡号：
 <ul>
 <li><b>CPU</b>：如 <code>cpu</code> 表示使用 CPU 进行推理；</li>
 <li><b>GPU</b>：如 <code>gpu:0</code> 表示使用第 1 块 GPU 进行推理；</li>
@@ -1592,15 +1601,12 @@ PP-ChatOCRv4 预测的流程、API说明、产出说明如下：
 </tr>
 <tr>
 <td><code>use_tensorrt</code></td>
-<td>是否使用 TensorRT 进行推理加速。</td>
+<td>是否启用 Paddle Inference 的 TensorRT 子图引擎。</br>
+对于 CUDA 11.8 版本的飞桨，兼容的 TensorRT 版本为 8.x（x>=6），建议安装 TensorRT 8.6.1.6。</br>
+对于 CUDA 12.6 版本的飞桨，兼容的 TensorRT 版本为 10.x（x>=5），建议安装 TensorRT 10.5.0.18。
+</td>
 <td><code>bool</code></td>
 <td><code>False</code></td>
-</tr>
-<tr>
-<td><code>min_subgraph_size</code></td>
-<td>最小子图大小，用于优化模型子图的计算。</td>
-<td><code>int</code></td>
-<td><code>3</code></td>
 </tr>
 <tr>
 <td><code>precision</code></td>
@@ -1610,10 +1616,18 @@ PP-ChatOCRv4 预测的流程、API说明、产出说明如下：
 </tr>
 <tr>
 <td><code>enable_mkldnn</code></td>
-<td>是否启用 MKL-DNN 加速库。
+<td>是否启用 MKL-DNN 加速推理。如果 MKL-DNN 不可用或模型不支持通过 MKL-DNN 加速，即使设置了此标志，也不会使用加速。
 </td>
 <td><code>bool</code></td>
 <td><code>True</code></td>
+</tr>
+<tr>
+<td><code>mkldnn_cache_capacity</code></td>
+<td>
+MKL-DNN 缓存容量。
+</td>
+<td><code>int</code></td>
+<td><code>10</code></td>
 </tr>
 <tr>
 <td><code>cpu_threads</code></td>
@@ -1813,7 +1827,6 @@ for res in visual_predict_res:
 <th>默认值</th>
 </tr>
 </thead>
-
 <tr>
 <td rowspan = "3"><code>print()</code></td>
 <td rowspan = "3">打印结果到终端</td>
@@ -1892,12 +1905,12 @@ for res in visual_predict_res:
         - `use_table_recognition`: `(bool)` 控制是否启用表格识别子产线
         - `use_formula_recognition`: `(bool)` 控制是否启用公式识别子产线
 
-    - `parsing_res_list`: `(List[Dict])` 解析结果的列表，每个元素为一个字典，列表顺序为解析后的阅读顺序。
+    - `parsing_res_list`: `(List[Dict])` 解析结果的列表，每个元素为一个dict，列表顺序为解析后的阅读顺序。
         - `block_bbox`: `(np.ndarray)` 版面区域的边界框。
         - `block_label`: `(str)` 版面区域的标签，例如`text`, `table`等。
         - `block_content`: `(str)` 内容为版面区域内的内容。
 
-    - `overall_ocr_res`: `(Dict[str, Union[List[str], List[float], numpy.ndarray]])` 全局 OCR 结果的字典
+    - `overall_ocr_res`: `(Dict[str, Union[List[str], List[float], numpy.ndarray]])` 全局 OCR 结果的dict
       -  `input_path`: `(Union[str, None])` 图像OCR子产线接受的图像路径，当输入为`numpy.ndarray`时，保存为`None`
       - `model_settings`: `(Dict)` OCR子产线的模型配置参数
       - `dt_polys`: `(List[numpy.ndarray])` 文本检测的多边形框列表。每个检测框由4个顶点坐标构成的numpy数组表示，数组shape为(4, 2)，数据类型为int16
@@ -1917,12 +1930,12 @@ for res in visual_predict_res:
       - `rec_scores`: `(List[float])` 文本识别的置信度列表，已按`text_rec_score_thresh`过滤
       - `rec_polys`: `(List[numpy.ndarray])` 经过置信度过滤的文本检测框列表，格式同`dt_polys`
 
-    - `formula_res_list`: `(List[Dict[str, Union[numpy.ndarray, List[float], str]]])` 公式识别结果列表，每个元素为一个字典
+    - `formula_res_list`: `(List[Dict[str, Union[numpy.ndarray, List[float], str]]])` 公式识别结果列表，每个元素为一个dict
         - `rec_formula`: `(str)` 公式识别结果
         - `rec_polys`: `(numpy.ndarray)` 公式检测框，shape为(4, 2)，dtype为int16
         - `formula_region_id`: `(int)` 公式所在的区域编号
 
-    - `seal_res_list`: `(List[Dict[str, Union[numpy.ndarray, List[float], str]]])` 印章识别结果列表，每个元素为一个字典
+    - `seal_res_list`: `(List[Dict[str, Union[numpy.ndarray, List[float], str]]])` 印章识别结果列表，每个元素为一个dict
         - `input_path`: `(str)` 印章图像的输入路径
         - `model_settings`: `(Dict)` 印章识别子产线的模型配置参数
         - `dt_polys`: `(List[numpy.ndarray])` 印章检测框列表，格式同`dt_polys`
@@ -1934,7 +1947,7 @@ for res in visual_predict_res:
         - `rec_polys`: `(List[numpy.ndarray])` 经过置信度过滤的印章检测框列表，格式同`dt_polys`
         - `rec_boxes`: `(numpy.ndarray)` 检测框的矩形边界框数组，shape为(n, 4)，dtype为int16。每一行表示一个矩形
 
-    - `table_res_list`: `(List[Dict[str, Union[numpy.ndarray, List[float], str]]])` 表格识别结果列表，每个元素为一个字典
+    - `table_res_list`: `(List[Dict[str, Union[numpy.ndarray, List[float], str]]])` 表格识别结果列表，每个元素为一个dict
         - `cell_box_list`: `(List[numpy.ndarray])` 表格单元格的边界框列表
         - `pred_html`: `(str)` 表格的HTML格式字符串
         - `table_ocr_pred`: `(dict)` 表格的OCR识别结果
@@ -1965,7 +1978,7 @@ for res in visual_predict_res:
 </table>
 
 - `json` 属性获取的预测结果为dict类型的数据，相关内容与调用 `save_to_json()` 方法保存的内容一致。
-- `img` 属性返回的预测结果是一个字典类型的数据。其中，键分别为 `layout_det_res`、`overall_ocr_res`、`text_paragraphs_ocr_res`、`formula_res_region1`、`table_cell_img` 和 `seal_res_region1`，对应的值是 `Image.Image` 对象：分别用于显示版面区域检测、OCR、OCR文本段落、公式、表格和印章结果的可视化图像。如果没有使用可选模块，则字典中只包含 `layout_det_res`。
+- `img` 属性返回的预测结果是一个dict类型的数据。其中，键分别为 `layout_det_res`、`overall_ocr_res`、`text_paragraphs_ocr_res`、`formula_res_region1`、`table_cell_img` 和 `seal_res_region1`，对应的值是 `Image.Image` 对象：分别用于显示版面区域检测、OCR、OCR文本段落、公式、表格和印章结果的可视化图像。如果没有使用可选模块，则dict中只包含 `layout_det_res`。
 </details>
 
 <details><summary>（4）调用PP-ChatOCRv4的产线对象的 <code>build_vector()</code> 方法，对文本内容进行向量构建。</summary>
@@ -1984,7 +1997,7 @@ for res in visual_predict_res:
 </thead>
 <tr>
 <td><code>visual_info</code></td>
-<td>视觉信息，可以是包含视觉信息的字典，或者由这些字典组成的列表。</td>
+<td>视觉信息，可以是包含视觉信息的dict，或者由这些dict组成的列表。</td>
 <td><code>list|dict</code></td>
 <td><code>None</code></td>
 </tr>
@@ -2013,7 +2026,7 @@ for res in visual_predict_res:
 <td><code>None</code></td>
 </tr>
 </table>
-该方法会返回一个包含视觉文本信息的字典，字典的内容如下：
+该方法会返回一个包含视觉文本信息的dict，dict的内容如下：
 
 - `flag_save_bytes_vector`：`(bool)`是否将结果保存为二进制文件
 - `flag_too_short_text`：`(bool)`是否文本长度小于最小字符数量
@@ -2196,7 +2209,7 @@ for res in visual_predict_res:
 </table>
 
 该方法会将结果打印到终端，打印到终端的内容解释如下：
-  - `chat_res`: `(dict)` 提取信息的结果，是一个字典，包含了待抽取的键和对应的值。
+  - `chat_res`: `(dict)` 提取信息的结果，是一个dict，包含了待抽取的键和对应的值。
 
 </details>
 
@@ -2863,6 +2876,621 @@ print("Final result:")
 print(result_chat["chatResult"])
 </code></pre>
 </details>
+
+<details><summary>C++</summary>
+
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include "cpp-httplib/httplib.h" // https://github.com/Huiyicc/cpp-httplib
+#include "nlohmann/json.hpp" // https://github.com/nlohmann/json
+#include "base64.hpp" // https://github.com/tobiaslocker/base64
+
+using json = nlohmann::json;
+
+std::string encode_image(const std::string& path) {
+    std::ifstream file(path, std::ios::binary | std::ios::ate);
+    if (!file) throw std::runtime_error("File open error.");
+    std::streamsize size = file.tellg();
+    file.seekg(0, std::ios::beg);
+    std::vector<char> buf(size);
+    file.read(buf.data(), size);
+    return base64::to_base64(std::string(buf.data(), buf.size()));
+}
+
+int main() {
+    httplib::Client client("localhost", 8080);
+    std::string imagePath = "./demo.jpg";
+    std::string imageData = encode_image(imagePath);
+    json keys = { "合格证编号" };
+
+    json payload_visual = { {"file", imageData}, {"fileType", 1} };
+    auto resp1 = client.Post("/chatocr-visual", payload_visual.dump(), "application/json");
+    if (!resp1 || resp1->status != 200) {
+        std::cerr << "chatocr-visual failed.\n"; return 1;
+    }
+    json result_visual = json::parse(resp1->body)["result"];
+
+    for (size_t i = 0; i < result_visual["layoutParsingResults"].size(); ++i) {
+        auto& res = result_visual["layoutParsingResults"][i];
+        std::cout << "prunedResult: " << res["prunedResult"].dump() << "\n";
+        if (res.contains("outputImages")) {
+            for (auto& [name, b64] : res["outputImages"].items()) {
+                std::string outPath = name + "_" + std::to_string(i) + ".jpg";
+                std::string decoded = base64::from_base64(b64.get<std::string>());
+                std::ofstream out(outPath, std::ios::binary);
+                out.write(decoded.data(), decoded.size());
+                out.close();
+                std::cout << "Saved: " << outPath << "\n";
+            }
+        }
+    }
+
+    json payload_vector = { {"visualInfo", result_visual["visualInfo"]} };
+    auto resp2 = client.Post("/chatocr-vector", payload_vector.dump(), "application/json");
+    if (!resp2 || resp2->status != 200) {
+        std::cerr << "chatocr-vector failed.\n"; return 1;
+    }
+    json result_vector = json::parse(resp2->body)["result"];
+
+    json payload_mllm = { {"image", imageData}, {"keyList", keys} };
+    auto resp3 = client.Post("/chatocr-mllm", payload_mllm.dump(), "application/json");
+    if (!resp3 || resp3->status != 200) {
+        std::cerr << "chatocr-mllm failed.\n"; return 1;
+    }
+    json result_mllm = json::parse(resp3->body)["result"];
+
+    json payload_chat = {
+        {"keyList", keys},
+        {"visualInfo", result_visual["visualInfo"]},
+        {"useVectorRetrieval", true},
+        {"vectorInfo", result_vector["vectorInfo"]},
+        {"mllmPredictInfo", result_mllm["mllmPredictInfo"]}
+    };
+    auto resp4 = client.Post("/chatocr-chat", payload_chat.dump(), "application/json");
+    if (!resp4 || resp4->status != 200) {
+        std::cerr << "chatocr-chat failed.\n"; return 1;
+    }
+
+    json result_chat = json::parse(resp4->body)["result"];
+    std::cout << "Final chat result: " << result_chat["chatResult"] << std::endl;
+
+    return 0;
+}
+</code></pre></details>
+
+<details><summary>Java</summary>
+
+<pre><code class="language-java">import okhttp3.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Base64;
+import java.util.Iterator;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        String API_BASE_URL = "http://localhost:8080";
+        String imagePath = "./demo.jpg";
+        String[] keys = {"合格证编号"};
+
+        OkHttpClient client = new OkHttpClient();
+        ObjectMapper objectMapper = new ObjectMapper();
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+        byte[] imageBytes = java.nio.file.Files.readAllBytes(new File(imagePath).toPath());
+        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+        ObjectNode visualPayload = objectMapper.createObjectNode();
+        visualPayload.put("file", base64Image);
+        visualPayload.put("fileType", 1);
+
+        Request requestVisual = new Request.Builder()
+                .url(API_BASE_URL + "/chatocr-visual")
+                .post(RequestBody.create(JSON, visualPayload.toString()))
+                .build();
+
+        Response responseVisual = client.newCall(requestVisual).execute();
+        if (!responseVisual.isSuccessful()) {
+            System.err.println("chatocr-visual failed: " + responseVisual.code());
+            return;
+        }
+
+        JsonNode resultVisual = objectMapper.readTree(responseVisual.body().string()).get("result");
+
+        JsonNode layoutResults = resultVisual.get("layoutParsingResults");
+        for (int i = 0; i < layoutResults.size(); i++) {
+            JsonNode res = layoutResults.get(i);
+            System.out.println("prunedResult [" + i + "]: " + res.get("prunedResult").toString());
+
+            JsonNode outputImages = res.get("outputImages");
+            if (outputImages != null && outputImages.isObject()) {
+                Iterator<String> names = outputImages.fieldNames();
+                while (names.hasNext()) {
+                    String imgName = names.next();
+                    String imgBase64 = outputImages.get(imgName).asText();
+                    byte[] imgBytes = Base64.getDecoder().decode(imgBase64);
+                    String imgPath = imgName + "_" + i + ".jpg";
+                    try (FileOutputStream fos = new FileOutputStream(imgPath)) {
+                        fos.write(imgBytes);
+                        System.out.println("Saved image: " + imgPath);
+                    }
+                }
+            }
+        }
+
+        ObjectNode vectorPayload = objectMapper.createObjectNode();
+        vectorPayload.set("visualInfo", resultVisual.get("visualInfo"));
+
+        Request requestVector = new Request.Builder()
+                .url(API_BASE_URL + "/chatocr-vector")
+                .post(RequestBody.create(JSON, vectorPayload.toString()))
+                .build();
+
+        Response responseVector = client.newCall(requestVector).execute();
+        if (!responseVector.isSuccessful()) {
+            System.err.println("chatocr-vector failed: " + responseVector.code());
+            return;
+        }
+
+        JsonNode resultVector = objectMapper.readTree(responseVector.body().string()).get("result");
+
+        ObjectNode mllmPayload = objectMapper.createObjectNode();
+        mllmPayload.put("image", base64Image);
+        mllmPayload.putArray("keyList").add(keys[0]);
+
+        Request requestMllm = new Request.Builder()
+                .url(API_BASE_URL + "/chatocr-mllm")
+                .post(RequestBody.create(JSON, mllmPayload.toString()))
+                .build();
+
+        Response responseMllm = client.newCall(requestMllm).execute();
+        if (!responseMllm.isSuccessful()) {
+            System.err.println("chatocr-mllm failed: " + responseMllm.code());
+            return;
+        }
+
+        JsonNode resultMllm = objectMapper.readTree(responseMllm.body().string()).get("result");
+
+        ObjectNode chatPayload = objectMapper.createObjectNode();
+        chatPayload.putArray("keyList").add(keys[0]);
+        chatPayload.set("visualInfo", resultVisual.get("visualInfo"));
+        chatPayload.put("useVectorRetrieval", true);
+        chatPayload.set("vectorInfo", resultVector.get("vectorInfo"));
+        chatPayload.set("mllmPredictInfo", resultMllm.get("mllmPredictInfo"));
+
+        Request requestChat = new Request.Builder()
+                .url(API_BASE_URL + "/chatocr-chat")
+                .post(RequestBody.create(JSON, chatPayload.toString()))
+                .build();
+
+        Response responseChat = client.newCall(requestChat).execute();
+        if (!responseChat.isSuccessful()) {
+            System.err.println("chatocr-chat failed: " + responseChat.code());
+            return;
+        }
+
+        JsonNode resultChat = objectMapper.readTree(responseChat.body().string()).get("result");
+        System.out.println("Final result:");
+        System.out.println(resultChat.get("chatResult").toString());
+    }
+}
+</code></pre></details>
+
+<details><summary>Go</summary>
+
+<pre><code class="language-go">package main
+
+import (
+    "bytes"
+    "encoding/base64"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+    "os"
+)
+
+func sendPostRequest(url string, payload map[string]interface{}) (map[string]interface{}, error) {
+    bodyBytes, err := json.Marshal(payload)
+    if err != nil {
+        return nil, fmt.Errorf("error marshaling payload: %v", err)
+    }
+
+    req, err := http.NewRequest("POST", url, bytes.NewBuffer(bodyBytes))
+    if err != nil {
+        return nil, fmt.Errorf("error creating request: %v", err)
+    }
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        return nil, fmt.Errorf("error sending request: %v", err)
+    }
+    defer resp.Body.Close()
+
+    if resp.StatusCode != http.StatusOK {
+        return nil, fmt.Errorf("status code error: %d", resp.StatusCode)
+    }
+
+    respBytes, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        return nil, fmt.Errorf("error reading response: %v", err)
+    }
+
+    var result map[string]interface{}
+    if err := json.Unmarshal(respBytes, &result); err != nil {
+        return nil, fmt.Errorf("error unmarshaling response: %v", err)
+    }
+    return result["result"].(map[string]interface{}), nil
+}
+
+func main() {
+    apiBase := "http://localhost:8080"
+    imagePath := "./demo.jpg"
+    keys := []string{"合格证编号"}
+
+    imageBytes, err := ioutil.ReadFile(imagePath)
+    if err != nil {
+        fmt.Printf("read image failed : %v\n", err)
+        return
+    }
+    imageData := base64.StdEncoding.EncodeToString(imageBytes)
+
+    visualPayload := map[string]interface{}{
+        "file":     imageData,
+        "fileType": 1,
+    }
+    visualResult, err := sendPostRequest(apiBase+"/chatocr-visual", visualPayload)
+    if err != nil {
+        fmt.Printf("chatocr-visual request error: %v\n", err)
+        return
+    }
+
+    layoutResults := visualResult["layoutParsingResults"].([]interface{})
+    for i, res := range layoutResults {
+        layout := res.(map[string]interface{})
+        fmt.Println("PrunedResult:", layout["prunedResult"])
+        outputImages := layout["outputImages"].(map[string]interface{})
+        for name, img := range outputImages {
+            imgBytes, _ := base64.StdEncoding.DecodeString(img.(string))
+            filename := fmt.Sprintf("%s_%d.jpg", name, i)
+            if err := os.WriteFile(filename, imgBytes, 0644); err == nil {
+                fmt.Printf("save image：%s\n", filename)
+            }
+        }
+    }
+
+    vectorPayload := map[string]interface{}{
+        "visualInfo": visualResult["visualInfo"],
+    }
+    vectorResult, err := sendPostRequest(apiBase+"/chatocr-vector", vectorPayload)
+    if err != nil {
+        fmt.Printf("chatocr-vector request error: %v\n", err)
+        return
+    }
+
+    mllmPayload := map[string]interface{}{
+        "image":   imageData,
+        "keyList": keys,
+    }
+    mllmResult, err := sendPostRequest(apiBase+"/chatocr-mllm", mllmPayload)
+    if err != nil {
+        fmt.Printf("chatocr-mllm request error: %v\n", err)
+        return
+    }
+
+    chatPayload := map[string]interface{}{
+        "keyList":           keys,
+        "visualInfo":        visualResult["visualInfo"],
+        "useVectorRetrieval": true,
+        "vectorInfo":        vectorResult["vectorInfo"],
+        "mllmPredictInfo":   mllmResult["mllmPredictInfo"],
+    }
+    chatResult, err := sendPostRequest(apiBase+"/chatocr-chat", chatPayload)
+    if err != nil {
+        fmt.Printf("chatocr-chat request error: %v\n", err)
+        return
+    }
+
+    fmt.Println("final result：", chatResult["chatResult"])
+}
+</code></pre></details>
+
+<details><summary>C#</summary>
+
+<pre><code class="language-csharp">using System;
+using System.IO;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+
+class Program
+{
+    static readonly string API_BASE_URL = "http://localhost:8080";
+    static readonly string inputFilePath = "./demo.jpg";
+    static readonly string[] keys = { "合格证编号" };
+
+    static async Task Main(string[] args)
+    {
+        var httpClient = new HttpClient();
+
+        byte[] imageBytes = File.ReadAllBytes(inputFilePath);
+        string imageData = Convert.ToBase64String(imageBytes);
+
+        var payloadVisual = new JObject
+        {
+            { "file", imageData },
+            { "fileType", 1 }
+        };
+
+        var respVisual = await httpClient.PostAsync($"{API_BASE_URL}/chatocr-visual",
+            new StringContent(payloadVisual.ToString(), Encoding.UTF8, "application/json"));
+
+        if (!respVisual.IsSuccessStatusCode)
+        {
+            Console.Error.WriteLine($"Request to chatocr-visual failed: {respVisual.StatusCode}");
+            Console.Error.WriteLine(await respVisual.Content.ReadAsStringAsync());
+            return;
+        }
+
+        JObject resultVisual = JObject.Parse(await respVisual.Content.ReadAsStringAsync())["result"] as JObject;
+
+        var layoutParsingResults = (JArray)resultVisual["layoutParsingResults"];
+        for (int i = 0; i < layoutParsingResults.Count; i++)
+        {
+            var res = layoutParsingResults[i];
+            Console.WriteLine($"[{i}] prunedResult:\n{res["prunedResult"]}");
+
+            JObject outputImages = res["outputImages"] as JObject;
+            if (outputImages != null)
+            {
+                foreach (var img in outputImages)
+                {
+                    string imgName = img.Key;
+                    string base64Img = img.Value?.ToString();
+                    if (!string.IsNullOrEmpty(base64Img))
+                    {
+                        string imgPath = $"{imgName}_{i}.jpg";
+                        File.WriteAllBytes(imgPath, Convert.FromBase64String(base64Img));
+                        Console.WriteLine($"Output image saved at {imgPath}");
+                    }
+                }
+            }
+        }
+
+        var payloadVector = new JObject
+        {
+            { "visualInfo", resultVisual["visualInfo"] }
+        };
+
+        var respVector = await httpClient.PostAsync($"{API_BASE_URL}/chatocr-vector",
+            new StringContent(payloadVector.ToString(), Encoding.UTF8, "application/json"));
+
+        if (!respVector.IsSuccessStatusCode)
+        {
+            Console.Error.WriteLine($"Request to chatocr-vector failed: {respVector.StatusCode}");
+            Console.Error.WriteLine(await respVector.Content.ReadAsStringAsync());
+            return;
+        }
+
+        JObject resultVector = JObject.Parse(await respVector.Content.ReadAsStringAsync())["result"] as JObject;
+
+        var payloadMllm = new JObject
+        {
+            { "image", imageData },
+            { "keyList", new JArray(keys) }
+        };
+
+        var respMllm = await httpClient.PostAsync($"{API_BASE_URL}/chatocr-mllm",
+            new StringContent(payloadMllm.ToString(), Encoding.UTF8, "application/json"));
+
+        if (!respMllm.IsSuccessStatusCode)
+        {
+            Console.Error.WriteLine($"Request to chatocr-mllm failed: {respMllm.StatusCode}");
+            Console.Error.WriteLine(await respMllm.Content.ReadAsStringAsync());
+            return;
+        }
+
+        JObject resultMllm = JObject.Parse(await respMllm.Content.ReadAsStringAsync())["result"] as JObject;
+
+        var payloadChat = new JObject
+        {
+            { "keyList", new JArray(keys) },
+            { "visualInfo", resultVisual["visualInfo"] },
+            { "useVectorRetrieval", true },
+            { "vectorInfo", resultVector["vectorInfo"] },
+            { "mllmPredictInfo", resultMllm["mllmPredictInfo"] }
+        };
+
+        var respChat = await httpClient.PostAsync($"{API_BASE_URL}/chatocr-chat",
+            new StringContent(payloadChat.ToString(), Encoding.UTF8, "application/json"));
+
+        if (!respChat.IsSuccessStatusCode)
+        {
+            Console.Error.WriteLine($"Request to chatocr-chat failed: {respChat.StatusCode}");
+            Console.Error.WriteLine(await respChat.Content.ReadAsStringAsync());
+            return;
+        }
+
+        JObject resultChat = JObject.Parse(await respChat.Content.ReadAsStringAsync())["result"] as JObject;
+        Console.WriteLine("Final result:");
+        Console.WriteLine(resultChat["chatResult"]);
+    }
+}
+</code></pre></details>
+
+<details><summary>Node.js</summary>
+
+<pre><code class="language-js">const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
+
+const API_BASE_URL = 'http://localhost:8080';
+const imagePath = './demo.jpg';
+const keys = ['合格证编号'];
+
+function encodeImageToBase64(filePath) {
+  const bitmap = fs.readFileSync(filePath);
+  return Buffer.from(bitmap).toString('base64');
+}
+
+(async () => {
+  try {
+    const imageData = encodeImageToBase64(imagePath);
+
+    const respVisual = await axios.post(`${API_BASE_URL}/chatocr-visual`, {
+      file: imageData,
+      fileType: 1
+    });
+
+    const resultVisual = respVisual.data.result;
+    resultVisual.layoutParsingResults.forEach((res, i) => {
+      console.log(`\n[${i}] prunedResult:\n`, res.prunedResult);
+      const outputImages = res.outputImages || {};
+      for (const [imgName, base64Img] of Object.entries(outputImages)) {
+        const fileName = `${imgName}_${i}.jpg`;
+        fs.writeFileSync(fileName, Buffer.from(base64Img, 'base64'));
+        console.log(`Output image saved at ${fileName}`);
+      }
+    });
+
+    const respVector = await axios.post(`${API_BASE_URL}/chatocr-vector`, {
+      visualInfo: resultVisual.visualInfo
+    });
+    const resultVector = respVector.data.result;
+
+    const respMllm = await axios.post(`${API_BASE_URL}/chatocr-mllm`, {
+      image: imageData,
+      keyList: keys
+    });
+    const resultMllm = respMllm.data.result;
+
+    const respChat = await axios.post(`${API_BASE_URL}/chatocr-chat`, {
+      keyList: keys,
+      visualInfo: resultVisual.visualInfo,
+      useVectorRetrieval: true,
+      vectorInfo: resultVector.vectorInfo,
+      mllmPredictInfo: resultMllm.mllmPredictInfo
+    });
+
+    const resultChat = respChat.data.result;
+    console.log('\nFinal result:\n', resultChat.chatResult);
+
+  } catch (error) {
+    if (error.response) {
+      console.error(`❌ Request failed: ${error.response.status}`);
+      console.error(error.response.data);
+    } else {
+      console.error('❌ Error occurred:', error.message);
+    }
+  }
+})();
+</code></pre></details>
+
+<details><summary>PHP</summary>
+
+<pre><code class="language-php">&lt;?php
+
+$API_BASE_URL = "http://localhost:8080";
+$image_path = "./demo.jpg";
+$keys = ["合格证编号"];
+
+$image_data = base64_encode(file_get_contents($image_path));
+
+$payload_visual = [
+    "file" => $image_data,
+    "fileType" => 1
+];
+$response_visual_raw = send_post_raw("$API_BASE_URL/chatocr-visual", $payload_visual);
+$response_visual = json_decode($response_visual_raw, true);
+if (!isset($response_visual["result"])) {
+    echo "chatocr-visual request error\n";
+    print_r($response_visual);
+    exit(1);
+}
+$result_visual_raw = json_decode($response_visual_raw, false)->result;
+$result_visual_arr = $response_visual["result"];
+
+foreach ($result_visual_arr["layoutParsingResults"] as $i => $res) {
+    echo "[$i] prunedResult:\n";
+    print_r($res["prunedResult"]);
+    if (!empty($res["outputImages"])) {
+        foreach ($res["outputImages"] as $img_name => $base64_img) {
+            $img_path = "{$img_name}_{$i}.jpg";
+            file_put_contents($img_path, base64_decode($base64_img));
+            echo "Output image saved at $img_path\n";
+        }
+    }
+}
+
+$payload_vector = [
+    "visualInfo" => $result_visual_raw->visualInfo
+];
+$response_vector_raw = send_post_raw("$API_BASE_URL/chatocr-vector", $payload_vector);
+$response_vector = json_decode($response_vector_raw, true);
+if (!isset($response_vector["result"])) {
+    echo "chatocr-vector request error\n";
+    print_r($response_vector);
+    exit(1);
+}
+$result_vector_raw = json_decode($response_vector_raw, false)->result;
+
+$payload_mllm = [
+    "image" => $image_data,
+    "keyList" => $keys
+];
+$response_mllm_raw = send_post_raw("$API_BASE_URL/chatocr-mllm", $payload_mllm);
+$response_mllm = json_decode($response_mllm_raw, true);
+if (!isset($response_mllm["result"])) {
+    echo "chatocr-mllm request error\n";
+    print_r($response_mllm);
+    exit(1);
+}
+$result_mllm_raw = json_decode($response_mllm_raw, false)->result;
+
+$payload_chat = [
+    "keyList" => $keys,
+    "visualInfo" => $result_visual_raw->visualInfo,
+    "useVectorRetrieval" => true,
+    "vectorInfo" => $result_vector_raw->vectorInfo,
+    "mllmPredictInfo" => $result_mllm_raw->mllmPredictInfo
+];
+$response_chat_raw = send_post_raw("$API_BASE_URL/chatocr-chat", $payload_chat);
+$response_chat = json_decode($response_chat_raw, true);
+if (!isset($response_chat["result"])) {
+    echo "chatocr-chat request error\n";
+    print_r($response_chat);
+    exit(1);
+}
+
+echo "Final result:\n";
+echo json_encode($response_chat["result"]["chatResult"], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . "\n";
+
+
+function send_post_raw($url, $data) {
+    $json_str = json_encode($data, JSON_UNESCAPED_UNICODE);
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_str);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    if ($response === false) {
+        echo "cURL error: " . curl_error($ch) . "\n";
+    }
+    curl_close($ch);
+    return $response;
+}
+?&gt;
+</code></pre></details>
 </details>
 <br/>
 
@@ -2978,7 +3606,7 @@ paddleocr pp_chatocrv4_doc --paddlex_config PP-ChatOCRv4.yaml ...
 
 4. 在 Python API 中加载产线配置文件
 
-初始化产线对象时，可通过 paddlex_config 参数传入 PaddleX 产线配置文件路径或配置字典，PaddleOCR 会读取其中的内容作为产线配置。示例如下：
+初始化产线对象时，可通过 paddlex_config 参数传入 PaddleX 产线配置文件路径或配置dict，PaddleOCR 会读取其中的内容作为产线配置。示例如下：
 
 ```python
 from paddleocr import PPChatOCRv4

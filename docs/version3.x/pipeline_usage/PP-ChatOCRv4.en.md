@@ -1,4 +1,7 @@
-# PP-ChatOCRv4-doc Pipeline Tutorial
+---
+comments: true
+---
+# PP-ChatOCRv4-doc Pipeline Usage Tutorial
 
 ## 1. Introduction to PP-ChatOCRv4-doc Pipeline
 PP-ChatOCRv4-doc is a unique document and image intelligent analysis solution from PaddlePaddle, combining LLM, MLLM, and OCR technologies to address complex document information extraction challenges such as layout analysis, rare characters, multi-page PDFs, tables, and seal recognition. Integrated with ERNIE Bot, it fuses massive data and knowledge, achieving high accuracy and wide applicability. This pipeline also provides flexible service deployment options, supporting deployment on various hardware. Furthermore, it offers custom development capabilities, allowing you to train and fine-tune models on your own datasets, with seamless integration of trained models.
@@ -535,7 +538,7 @@ Specify the path to save the inference results file. If not set, the inference r
 </tr>
 <tr>
 <td><code>invoke_mllm</code></td>
-<td>Whether to load and use a multimodal large model.</td>
+<td>Whether to load and use a multimodal large model. If not set, the default is <code>False</code>.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
@@ -683,9 +686,7 @@ The name of the document orientation classification model. If not set, the defau
 </tr>
 <tr>
 <td><code>layout_threshold</code></td>
-<td>Threshold for layout detection, used to filter out predictions with low confidence.
-Such as 0.2, indicates filtering out all bounding boxes with a confidence score less than 0.2.
-If not set, the default PaddleX official model configuration will be used
+<td>Score threshold for the layout model. Any value between <code>0-1</code>. If not set, the default value is used, which is <code>0.5</code>.
 </td>
 <td><code>float</code></td>
 <td></td>
@@ -693,16 +694,14 @@ If not set, the default PaddleX official model configuration will be used
 <tr>
 <td><code>layout_nms</code></td>
 <td>
-Whether to load and use NMS (Non-Maximum Suppression) post-processing for layout region detection to filter out overlapping boxes. If not set, the default configuration of the official model will be used.
+Whether to use Non-Maximum Suppression (NMS) as post-processing for layout detection. If not set, the parameter will default to the value initialized in the pipeline, which is set to <code>True</code> by default.
 </td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>layout_unclip_ratio</code></td>
-<td>
-The scaling factor for the side length of the detection boxes in layout region detection.
-A positive float number, e.g., 1.1, indicating that the center of the bounding box remains unchanged while the width and height are both scaled up by a factor of 1.1.If not set, the default PaddleX official model configuration will be used.
+<td>Unclip ratio for detected boxes in layout detection model. Any float > <code>0</code>. If not set, the default is <code>1.0</code>.
 </td>
 <td><code>float</code></td>
 <td></td>
@@ -714,14 +713,14 @@ A positive float number, e.g., 1.1, indicating that the center of the bounding b
 <li><b>large</b>: When set to "large", only the largest outer bounding box will be retained for overlapping bounding boxes, and the inner overlapping boxes will be removed;</li>
 <li><b>small</b>: When set to "small", only the smallest inner bounding boxes will be retained for overlapping bounding boxes, and the outer overlapping boxes will be removed;</li>
 <li><b>union</b>: No filtering of bounding boxes will be performed, and both inner and outer boxes will be retained;</li>
-</ul>If not set, the default PaddleX official model configuration will be used.
+</ul>If not set, the default is <code>large</code>.
 </td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>text_det_limit_side_len</code></td>
-<td>Maximum side length limit for text detection.
+<td>Image side length limitation for text detection.
 Any integer greater than <code>0</code>. If not set, the pipeline's initialized value for this parameter (initialized to <code>960</code>) will be used.
 </td>
 <td><code>int</code></td>
@@ -781,7 +780,7 @@ Any integer > <code>0</code>. If not set, the default is <code>736</code>.
 <tr>
 <td><code>seal_det_limit_type</code></td>
 <td>Limit type for image side in seal text detection.
-supports <code>min</code> and <code>max</code>; <code>min</code> ensures shortest side ≥ <code>det_limit_side_len</code>, <code>max</code> ensures longest side ≤ <code>limit_side_len</code>. If not set, default is <code>min</code>.
+supports <code>min</code> and <code>max</code>; <code>min</code> ensures shortest side ≥ <code>det_limit_side_len</code>, <code>max</code> ensures longest side ≤ <code>limit_side_len</code>. If not set, the default is <code>min</code>.
 </td>
 <td><code>str</code></td>
 <td></td>
@@ -790,14 +789,14 @@ supports <code>min</code> and <code>max</code>; <code>min</code> ensures shortes
 <td><code>seal_det_thresh</code></td>
 <td>Pixel threshold. Pixels with scores above this value in the probability map are considered text.
 Any float > <code>0</code></li>
-</ul>If not set, default is <code>0.2</code>.
+</ul>If not set, the default is <code>0.2</code>.
 </td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>seal_det_box_thresh</code></td>
-<td>Box threshold. Boxes with average pixel scores above this value are considered text regions.Any float > <code>0</code>. If not set, default is <code>0.6</code>.
+<td>Box threshold. Boxes with average pixel scores above this value are considered text regions.Any float > <code>0</code>. If not set, the default is <code>0.6</code>.
 </td>
 <td><code>float</code></td>
 <td></td>
@@ -805,7 +804,7 @@ Any float > <code>0</code></li>
 <tr>
 <td><code>seal_det_unclip_ratio</code></td>
 <td>Expansion ratio for seal text detection. Higher value means larger expansion area.
-any float > <code>0</code>. If not set, default is <code>0.5</code>.
+any float > <code>0</code>. If not set, the default is <code>0.5</code>.
 </td>
 <td><code>float</code></td>
 <td></td>
@@ -814,7 +813,7 @@ any float > <code>0</code>. If not set, default is <code>0.5</code>.
 <td><code>seal_rec_score_thresh</code></td>
 <td>Recognition score threshold. Text results above this value will be kept.
 Any float > <code>0</code></li>
-</ul>If not set, default is <code>0.0</code> (no threshold).
+</ul>If not set, the default is <code>0.0</code> (no threshold).
 </td>
 <td><code>float</code></td>
 <td></td>
@@ -831,7 +830,7 @@ Any float > <code>0</code></li>
 </tr>
 <tr>
 <td><code>device</code></td>
-<td>The device used for inference. You can specify a particular card number.
+<td>The device used for inference. You can specify a particular card number:
 <ul>
 <li><b>CPU</b>: e.g., <code>cpu</code> indicates using CPU for inference;</li>
 <li><b>GPU</b>: e.g., <code>gpu:0</code> indicates using the 1st GPU for inference;</li>
@@ -852,15 +851,12 @@ Any float > <code>0</code></li>
 </tr>
 <tr>
 <td><code>use_tensorrt</code></td>
-<td>Whether to use TensorRT for inference acceleration.</td>
+<td>Whether to use the Paddle Inference TensorRT subgraph engine.</br>
+For Paddle with CUDA version 11.8, the compatible TensorRT version is 8.x (x>=6), and it is recommended to install TensorRT 8.6.1.6.</br>
+For Paddle with CUDA version 12.6, the compatible TensorRT version is 10.x (x>=5), and it is recommended to install TensorRT 10.5.0.18.
+</td>
 <td><code>bool</code></td>
 <td><code>False</code></td>
-</tr>
-<tr>
-<td><code>min_subgraph_size</code></td>
-<td>Minimum subgraph size for optimizing the computation of model subgraphs. </td>
-<td><code>int</code></td>
-<td><code>3</code></td>
 </tr>
 <tr>
 <td><code>precision</code></td>
@@ -870,10 +866,18 @@ Any float > <code>0</code></li>
 </tr>
 <tr>
 <td><code>enable_mkldnn</code></td>
-<td>Whether to enable the MKL-DNN acceleration library.
+<td>Whether to enable MKL-DNN acceleration for inference. If MKL-DNN is unavailable or the model does not support it, acceleration will not be used even if this flag is set.
 </td>
 <td><code>bool</code></td>
 <td><code>True</code></td>
+</tr>
+<tr>
+<td><code>mkldnn_cache_capacity</code></td>
+<td>
+MKL-DNN cache capacity.
+</td>
+<td><code>int</code></td>
+<td><code>10</code></td>
 </tr>
 <tr>
 <td><code>cpu_threads</code></td>
@@ -1101,13 +1105,13 @@ The relevant parameter descriptions are as follows:
 </tr>
 <tr>
 <td><code>use_doc_orientation_classify</code></td>
-<td>Whether to load and use the document orientation classification function. If set to<code>None</code>, the value initialized by the pipeline for this parameter will be used by default (initialized to <code>True</code>).</td>
+<td>Whether to load and use the document orientation classification module. If set to<code>None</code>, the value initialized by the pipeline for this parameter will be used by default (initialized to <code>True</code>).</td>
 <td><code>bool</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_unwarping</code></td>
-<td>Whether to load and use the document unwarping function. If set to<code>None</code>, the value initialized by the pipeline for this parameter will be used by default (initialized to <code>True</code>).</td>
+<td>Whether to load and use the document unwarping module. If set to<code>None</code>, the value initialized by the pipeline for this parameter will be used by default (initialized to <code>True</code>).</td>
 <td><code>bool</code></td>
 <td><code>None</code></td>
 </tr>
@@ -1134,15 +1138,16 @@ The relevant parameter descriptions are as follows:
 <td>Layout model score threshold.
 <ul>
 <li><b>float</b>: Any float between <code>0-1</code>;</li>
-<li><b>None</b>: If set to <code>None</code>, the value initialized by the pipeline for this parameter will be used by default (initialized to <code>0.5</code>);</li>
+<li><b>dict</b>: <code>{0:0.1}</code> where the key is the class ID and the value is the threshold for that class;</li>
+<li><b>None</b>: If set to <code>None</code>, uses the pipeline default of <code>0.5</code>.</li>
 </ul>
 </td>
-<td><code>float</code></td>
+<td><code>float|dict</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
-<td>Whether the layout region detection model uses NMS post-processing.</td>
+<td>Whether to use Non-Maximum Suppression (NMS) as post-processing for layout detection. If set to <code>None</code>, the parameter will default to the value initialized in the pipeline, which is set to <code>True</code> by default.</td>
 <td><code>bool</code></td>
 <td><code>None</code></td>
 </tr>
@@ -1151,8 +1156,9 @@ The relevant parameter descriptions are as follows:
 <td>Expansion factor for the detection boxes of the layout region detection model.
 <ul>
 <li><b>float</b>: Any float greater than <code>0</code>;</li>
-<li><b>Tuple[float,float]</b>: Expansion factors in the horizontal and vertical directions respectively;</li>
-<li><b>None</b>: If set to <code>None</code>, the value initialized by the pipeline for this parameter will be used by default (initialized to <code>1.0</code>).</li>
+<li><b>Tuple[float,float]</b>: Expansion ratios in horizontal and vertical directions;</li>
+<li><b>dict</b>: A dictionary with <b>int</b> keys representing <code>cls_id</code>, and <b>tuple</b> values, e.g., <code>{0: (1.1, 2.0)}</code> means width is expanded 1.1× and height 2.0× for class 0 boxes;</li>
+<li><b>None</b>: If set to <code>None</code>, uses the pipeline default of <code>1.0</code>.</li>
 </ul>
 </td>
 <td><code>float|Tuple[float,float]|dict</code></td>
@@ -1172,7 +1178,7 @@ The relevant parameter descriptions are as follows:
 </tr>
 <tr>
 <td><code>text_det_limit_side_len</code></td>
-<td>Maximum side length limit for text detection.
+<td>Image side length limitation for text detection.
 <ul>
 <li><b>int</b>: Any integer greater than <code>0</code>;</li>
 <li><b>None</b>: If set to <code>None</code>, the value initialized by the pipeline for this parameter will be used by default (initialized to <code>960</code>).</li>
@@ -1338,7 +1344,7 @@ The relevant parameter descriptions are as follows:
 </tr>
 <tr>
 <td><code>device</code></td>
-<td>Device used for inference. Supports specifying a specific card number.
+<td>Device used for inference. Supports specifying a specific card number:
 <ul>
 <li><b>CPU</b>: e.g., <code>cpu</code> indicates using CPU for inference;</li>
 <li><b>GPU</b>: e.g., <code>gpu:0</code> indicates using the 1st GPU for inference;</li>
@@ -1360,15 +1366,12 @@ The relevant parameter descriptions are as follows:
 </tr>
 <tr>
 <td><code>use_tensorrt</code></td>
-<td>Whether to use TensorRT for inference acceleration.</td>
+<td>Whether to use the Paddle Inference TensorRT subgraph engine.</br>
+For Paddle with CUDA version 11.8, the compatible TensorRT version is 8.x (x>=6), and it is recommended to install TensorRT 8.6.1.6.</br>
+For Paddle with CUDA version 12.6, the compatible TensorRT version is 10.x (x>=5), and it is recommended to install TensorRT 10.5.0.18.
+</td>
 <td><code>bool</code></td>
 <td><code>False</code></td>
-</tr>
-<tr>
-<td><code>min_subgraph_size</code></td>
-<td>Minimum subgraph size, used to optimize model subgraph computation.</td>
-<td><code>int</code></td>
-<td><code>3</code></td>
 </tr>
 <tr>
 <td><code>precision</code></td>
@@ -1378,10 +1381,18 @@ The relevant parameter descriptions are as follows:
 </tr>
 <tr>
 <td><code>enable_mkldnn</code></td>
-<td>Whether to enable MKL-DNN acceleration library.
+<td>Whether to enable MKL-DNN acceleration for inference. If MKL-DNN is unavailable or the model does not support it, acceleration will not be used even if this flag is set.
 </td>
 <td><code>bool</code></td>
 <td><code>True</code></td>
+</tr>
+<tr>
+<td><code>mkldnn_cache_capacity</code></td>
+<td>
+MKL-DNN cache capacity.
+</td>
+<td><code>int</code></td>
+<td><code>10</code></td>
 </tr>
 <tr>
 <td><code>cpu_threads</code></td>
@@ -1581,7 +1592,6 @@ for res in visual_predict_res:
 <th>Default Value</th>
 </tr>
 </thead>
-
 <tr>
 <td rowspan = "3"><code>print()</code></td>
 <td rowspan = "3">Prints the result to the terminal</td>
@@ -2619,6 +2629,621 @@ print("Final result:")
 print(result_chat["chatResult"])
 </code></pre>
 </details>
+
+<details><summary>C++</summary>
+
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include "cpp-httplib/httplib.h" // https://github.com/Huiyicc/cpp-httplib
+#include "nlohmann/json.hpp" // https://github.com/nlohmann/json
+#include "base64.hpp" // https://github.com/tobiaslocker/base64
+
+using json = nlohmann::json;
+
+std::string encode_image(const std::string& path) {
+    std::ifstream file(path, std::ios::binary | std::ios::ate);
+    if (!file) throw std::runtime_error("File open error.");
+    std::streamsize size = file.tellg();
+    file.seekg(0, std::ios::beg);
+    std::vector<char> buf(size);
+    file.read(buf.data(), size);
+    return base64::to_base64(std::string(buf.data(), buf.size()));
+}
+
+int main() {
+    httplib::Client client("localhost", 8080);
+    std::string imagePath = "./demo.jpg";
+    std::string imageData = encode_image(imagePath);
+    json keys = { "Name" };
+
+    json payload_visual = { {"file", imageData}, {"fileType", 1} };
+    auto resp1 = client.Post("/chatocr-visual", payload_visual.dump(), "application/json");
+    if (!resp1 || resp1->status != 200) {
+        std::cerr << "chatocr-visual failed.\n"; return 1;
+    }
+    json result_visual = json::parse(resp1->body)["result"];
+
+    for (size_t i = 0; i < result_visual["layoutParsingResults"].size(); ++i) {
+        auto& res = result_visual["layoutParsingResults"][i];
+        std::cout << "prunedResult: " << res["prunedResult"].dump() << "\n";
+        if (res.contains("outputImages")) {
+            for (auto& [name, b64] : res["outputImages"].items()) {
+                std::string outPath = name + "_" + std::to_string(i) + ".jpg";
+                std::string decoded = base64::from_base64(b64.get<std::string>());
+                std::ofstream out(outPath, std::ios::binary);
+                out.write(decoded.data(), decoded.size());
+                out.close();
+                std::cout << "Saved: " << outPath << "\n";
+            }
+        }
+    }
+
+    json payload_vector = { {"visualInfo", result_visual["visualInfo"]} };
+    auto resp2 = client.Post("/chatocr-vector", payload_vector.dump(), "application/json");
+    if (!resp2 || resp2->status != 200) {
+        std::cerr << "chatocr-vector failed.\n"; return 1;
+    }
+    json result_vector = json::parse(resp2->body)["result"];
+
+    json payload_mllm = { {"image", imageData}, {"keyList", keys} };
+    auto resp3 = client.Post("/chatocr-mllm", payload_mllm.dump(), "application/json");
+    if (!resp3 || resp3->status != 200) {
+        std::cerr << "chatocr-mllm failed.\n"; return 1;
+    }
+    json result_mllm = json::parse(resp3->body)["result"];
+
+    json payload_chat = {
+        {"keyList", keys},
+        {"visualInfo", result_visual["visualInfo"]},
+        {"useVectorRetrieval", true},
+        {"vectorInfo", result_vector["vectorInfo"]},
+        {"mllmPredictInfo", result_mllm["mllmPredictInfo"]}
+    };
+    auto resp4 = client.Post("/chatocr-chat", payload_chat.dump(), "application/json");
+    if (!resp4 || resp4->status != 200) {
+        std::cerr << "chatocr-chat failed.\n"; return 1;
+    }
+
+    json result_chat = json::parse(resp4->body)["result"];
+    std::cout << "Final chat result: " << result_chat["chatResult"] << std::endl;
+
+    return 0;
+}
+</code></pre></details>
+
+<details><summary>Java</summary>
+
+<pre><code class="language-java">import okhttp3.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Base64;
+import java.util.Iterator;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        String API_BASE_URL = "http://localhost:8080";
+        String imagePath = "./demo.jpg";
+        String[] keys = {"Name"};
+
+        OkHttpClient client = new OkHttpClient();
+        ObjectMapper objectMapper = new ObjectMapper();
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+        byte[] imageBytes = java.nio.file.Files.readAllBytes(new File(imagePath).toPath());
+        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+        ObjectNode visualPayload = objectMapper.createObjectNode();
+        visualPayload.put("file", base64Image);
+        visualPayload.put("fileType", 1);
+
+        Request requestVisual = new Request.Builder()
+                .url(API_BASE_URL + "/chatocr-visual")
+                .post(RequestBody.create(JSON, visualPayload.toString()))
+                .build();
+
+        Response responseVisual = client.newCall(requestVisual).execute();
+        if (!responseVisual.isSuccessful()) {
+            System.err.println("chatocr-visual failed: " + responseVisual.code());
+            return;
+        }
+
+        JsonNode resultVisual = objectMapper.readTree(responseVisual.body().string()).get("result");
+
+        JsonNode layoutResults = resultVisual.get("layoutParsingResults");
+        for (int i = 0; i < layoutResults.size(); i++) {
+            JsonNode res = layoutResults.get(i);
+            System.out.println("prunedResult [" + i + "]: " + res.get("prunedResult").toString());
+
+            JsonNode outputImages = res.get("outputImages");
+            if (outputImages != null && outputImages.isObject()) {
+                Iterator<String> names = outputImages.fieldNames();
+                while (names.hasNext()) {
+                    String imgName = names.next();
+                    String imgBase64 = outputImages.get(imgName).asText();
+                    byte[] imgBytes = Base64.getDecoder().decode(imgBase64);
+                    String imgPath = imgName + "_" + i + ".jpg";
+                    try (FileOutputStream fos = new FileOutputStream(imgPath)) {
+                        fos.write(imgBytes);
+                        System.out.println("Saved image: " + imgPath);
+                    }
+                }
+            }
+        }
+
+        ObjectNode vectorPayload = objectMapper.createObjectNode();
+        vectorPayload.set("visualInfo", resultVisual.get("visualInfo"));
+
+        Request requestVector = new Request.Builder()
+                .url(API_BASE_URL + "/chatocr-vector")
+                .post(RequestBody.create(JSON, vectorPayload.toString()))
+                .build();
+
+        Response responseVector = client.newCall(requestVector).execute();
+        if (!responseVector.isSuccessful()) {
+            System.err.println("chatocr-vector failed: " + responseVector.code());
+            return;
+        }
+
+        JsonNode resultVector = objectMapper.readTree(responseVector.body().string()).get("result");
+
+        ObjectNode mllmPayload = objectMapper.createObjectNode();
+        mllmPayload.put("image", base64Image);
+        mllmPayload.putArray("keyList").add(keys[0]);
+
+        Request requestMllm = new Request.Builder()
+                .url(API_BASE_URL + "/chatocr-mllm")
+                .post(RequestBody.create(JSON, mllmPayload.toString()))
+                .build();
+
+        Response responseMllm = client.newCall(requestMllm).execute();
+        if (!responseMllm.isSuccessful()) {
+            System.err.println("chatocr-mllm failed: " + responseMllm.code());
+            return;
+        }
+
+        JsonNode resultMllm = objectMapper.readTree(responseMllm.body().string()).get("result");
+
+        ObjectNode chatPayload = objectMapper.createObjectNode();
+        chatPayload.putArray("keyList").add(keys[0]);
+        chatPayload.set("visualInfo", resultVisual.get("visualInfo"));
+        chatPayload.put("useVectorRetrieval", true);
+        chatPayload.set("vectorInfo", resultVector.get("vectorInfo"));
+        chatPayload.set("mllmPredictInfo", resultMllm.get("mllmPredictInfo"));
+
+        Request requestChat = new Request.Builder()
+                .url(API_BASE_URL + "/chatocr-chat")
+                .post(RequestBody.create(JSON, chatPayload.toString()))
+                .build();
+
+        Response responseChat = client.newCall(requestChat).execute();
+        if (!responseChat.isSuccessful()) {
+            System.err.println("chatocr-chat failed: " + responseChat.code());
+            return;
+        }
+
+        JsonNode resultChat = objectMapper.readTree(responseChat.body().string()).get("result");
+        System.out.println("Final result:");
+        System.out.println(resultChat.get("chatResult").toString());
+    }
+}
+</code></pre></details>
+
+<details><summary>Go</summary>
+
+<pre><code class="language-go">package main
+
+import (
+    "bytes"
+    "encoding/base64"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
+    "os"
+)
+
+func sendPostRequest(url string, payload map[string]interface{}) (map[string]interface{}, error) {
+    bodyBytes, err := json.Marshal(payload)
+    if err != nil {
+        return nil, fmt.Errorf("error marshaling payload: %v", err)
+    }
+
+    req, err := http.NewRequest("POST", url, bytes.NewBuffer(bodyBytes))
+    if err != nil {
+        return nil, fmt.Errorf("error creating request: %v", err)
+    }
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        return nil, fmt.Errorf("error sending request: %v", err)
+    }
+    defer resp.Body.Close()
+
+    if resp.StatusCode != http.StatusOK {
+        return nil, fmt.Errorf("status code error: %d", resp.StatusCode)
+    }
+
+    respBytes, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        return nil, fmt.Errorf("error reading response: %v", err)
+    }
+
+    var result map[string]interface{}
+    if err := json.Unmarshal(respBytes, &result); err != nil {
+        return nil, fmt.Errorf("error unmarshaling response: %v", err)
+    }
+    return result["result"].(map[string]interface{}), nil
+}
+
+func main() {
+    apiBase := "http://localhost:8080"
+    imagePath := "./demo.jpg"
+    keys := []string{"Name"}
+
+    imageBytes, err := ioutil.ReadFile(imagePath)
+    if err != nil {
+        fmt.Printf("read image failed : %v\n", err)
+        return
+    }
+    imageData := base64.StdEncoding.EncodeToString(imageBytes)
+
+    visualPayload := map[string]interface{}{
+        "file":     imageData,
+        "fileType": 1,
+    }
+    visualResult, err := sendPostRequest(apiBase+"/chatocr-visual", visualPayload)
+    if err != nil {
+        fmt.Printf("chatocr-visual request error: %v\n", err)
+        return
+    }
+
+    layoutResults := visualResult["layoutParsingResults"].([]interface{})
+    for i, res := range layoutResults {
+        layout := res.(map[string]interface{})
+        fmt.Println("PrunedResult:", layout["prunedResult"])
+        outputImages := layout["outputImages"].(map[string]interface{})
+        for name, img := range outputImages {
+            imgBytes, _ := base64.StdEncoding.DecodeString(img.(string))
+            filename := fmt.Sprintf("%s_%d.jpg", name, i)
+            if err := os.WriteFile(filename, imgBytes, 0644); err == nil {
+                fmt.Printf("save image：%s\n", filename)
+            }
+        }
+    }
+
+    vectorPayload := map[string]interface{}{
+        "visualInfo": visualResult["visualInfo"],
+    }
+    vectorResult, err := sendPostRequest(apiBase+"/chatocr-vector", vectorPayload)
+    if err != nil {
+        fmt.Printf("chatocr-vector request error: %v\n", err)
+        return
+    }
+
+    mllmPayload := map[string]interface{}{
+        "image":   imageData,
+        "keyList": keys,
+    }
+    mllmResult, err := sendPostRequest(apiBase+"/chatocr-mllm", mllmPayload)
+    if err != nil {
+        fmt.Printf("chatocr-mllm request error: %v\n", err)
+        return
+    }
+
+    chatPayload := map[string]interface{}{
+        "keyList":           keys,
+        "visualInfo":        visualResult["visualInfo"],
+        "useVectorRetrieval": true,
+        "vectorInfo":        vectorResult["vectorInfo"],
+        "mllmPredictInfo":   mllmResult["mllmPredictInfo"],
+    }
+    chatResult, err := sendPostRequest(apiBase+"/chatocr-chat", chatPayload)
+    if err != nil {
+        fmt.Printf("chatocr-chat request error: %v\n", err)
+        return
+    }
+
+    fmt.Println("final result：", chatResult["chatResult"])
+}
+</code></pre></details>
+
+<details><summary>C#</summary>
+
+<pre><code class="language-csharp">using System;
+using System.IO;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+
+class Program
+{
+    static readonly string API_BASE_URL = "http://localhost:8080";
+    static readonly string inputFilePath = "./demo.jpg";
+    static readonly string[] keys = { "Name" };
+
+    static async Task Main(string[] args)
+    {
+        var httpClient = new HttpClient();
+
+        byte[] imageBytes = File.ReadAllBytes(inputFilePath);
+        string imageData = Convert.ToBase64String(imageBytes);
+
+        var payloadVisual = new JObject
+        {
+            { "file", imageData },
+            { "fileType", 1 }
+        };
+
+        var respVisual = await httpClient.PostAsync($"{API_BASE_URL}/chatocr-visual",
+            new StringContent(payloadVisual.ToString(), Encoding.UTF8, "application/json"));
+
+        if (!respVisual.IsSuccessStatusCode)
+        {
+            Console.Error.WriteLine($"Request to chatocr-visual failed: {respVisual.StatusCode}");
+            Console.Error.WriteLine(await respVisual.Content.ReadAsStringAsync());
+            return;
+        }
+
+        JObject resultVisual = JObject.Parse(await respVisual.Content.ReadAsStringAsync())["result"] as JObject;
+
+        var layoutParsingResults = (JArray)resultVisual["layoutParsingResults"];
+        for (int i = 0; i < layoutParsingResults.Count; i++)
+        {
+            var res = layoutParsingResults[i];
+            Console.WriteLine($"[{i}] prunedResult:\n{res["prunedResult"]}");
+
+            JObject outputImages = res["outputImages"] as JObject;
+            if (outputImages != null)
+            {
+                foreach (var img in outputImages)
+                {
+                    string imgName = img.Key;
+                    string base64Img = img.Value?.ToString();
+                    if (!string.IsNullOrEmpty(base64Img))
+                    {
+                        string imgPath = $"{imgName}_{i}.jpg";
+                        File.WriteAllBytes(imgPath, Convert.FromBase64String(base64Img));
+                        Console.WriteLine($"Output image saved at {imgPath}");
+                    }
+                }
+            }
+        }
+
+        var payloadVector = new JObject
+        {
+            { "visualInfo", resultVisual["visualInfo"] }
+        };
+
+        var respVector = await httpClient.PostAsync($"{API_BASE_URL}/chatocr-vector",
+            new StringContent(payloadVector.ToString(), Encoding.UTF8, "application/json"));
+
+        if (!respVector.IsSuccessStatusCode)
+        {
+            Console.Error.WriteLine($"Request to chatocr-vector failed: {respVector.StatusCode}");
+            Console.Error.WriteLine(await respVector.Content.ReadAsStringAsync());
+            return;
+        }
+
+        JObject resultVector = JObject.Parse(await respVector.Content.ReadAsStringAsync())["result"] as JObject;
+
+        var payloadMllm = new JObject
+        {
+            { "image", imageData },
+            { "keyList", new JArray(keys) }
+        };
+
+        var respMllm = await httpClient.PostAsync($"{API_BASE_URL}/chatocr-mllm",
+            new StringContent(payloadMllm.ToString(), Encoding.UTF8, "application/json"));
+
+        if (!respMllm.IsSuccessStatusCode)
+        {
+            Console.Error.WriteLine($"Request to chatocr-mllm failed: {respMllm.StatusCode}");
+            Console.Error.WriteLine(await respMllm.Content.ReadAsStringAsync());
+            return;
+        }
+
+        JObject resultMllm = JObject.Parse(await respMllm.Content.ReadAsStringAsync())["result"] as JObject;
+
+        var payloadChat = new JObject
+        {
+            { "keyList", new JArray(keys) },
+            { "visualInfo", resultVisual["visualInfo"] },
+            { "useVectorRetrieval", true },
+            { "vectorInfo", resultVector["vectorInfo"] },
+            { "mllmPredictInfo", resultMllm["mllmPredictInfo"] }
+        };
+
+        var respChat = await httpClient.PostAsync($"{API_BASE_URL}/chatocr-chat",
+            new StringContent(payloadChat.ToString(), Encoding.UTF8, "application/json"));
+
+        if (!respChat.IsSuccessStatusCode)
+        {
+            Console.Error.WriteLine($"Request to chatocr-chat failed: {respChat.StatusCode}");
+            Console.Error.WriteLine(await respChat.Content.ReadAsStringAsync());
+            return;
+        }
+
+        JObject resultChat = JObject.Parse(await respChat.Content.ReadAsStringAsync())["result"] as JObject;
+        Console.WriteLine("Final result:");
+        Console.WriteLine(resultChat["chatResult"]);
+    }
+}
+</code></pre></details>
+
+<details><summary>Node.js</summary>
+
+<pre><code class="language-js">const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
+
+const API_BASE_URL = 'http://localhost:8080';
+const imagePath = './demo.jpg';
+const keys = ['Name'];
+
+function encodeImageToBase64(filePath) {
+  const bitmap = fs.readFileSync(filePath);
+  return Buffer.from(bitmap).toString('base64');
+}
+
+(async () => {
+  try {
+    const imageData = encodeImageToBase64(imagePath);
+
+    const respVisual = await axios.post(`${API_BASE_URL}/chatocr-visual`, {
+      file: imageData,
+      fileType: 1
+    });
+
+    const resultVisual = respVisual.data.result;
+    resultVisual.layoutParsingResults.forEach((res, i) => {
+      console.log(`\n[${i}] prunedResult:\n`, res.prunedResult);
+      const outputImages = res.outputImages || {};
+      for (const [imgName, base64Img] of Object.entries(outputImages)) {
+        const fileName = `${imgName}_${i}.jpg`;
+        fs.writeFileSync(fileName, Buffer.from(base64Img, 'base64'));
+        console.log(`Output image saved at ${fileName}`);
+      }
+    });
+
+    const respVector = await axios.post(`${API_BASE_URL}/chatocr-vector`, {
+      visualInfo: resultVisual.visualInfo
+    });
+    const resultVector = respVector.data.result;
+
+    const respMllm = await axios.post(`${API_BASE_URL}/chatocr-mllm`, {
+      image: imageData,
+      keyList: keys
+    });
+    const resultMllm = respMllm.data.result;
+
+    const respChat = await axios.post(`${API_BASE_URL}/chatocr-chat`, {
+      keyList: keys,
+      visualInfo: resultVisual.visualInfo,
+      useVectorRetrieval: true,
+      vectorInfo: resultVector.vectorInfo,
+      mllmPredictInfo: resultMllm.mllmPredictInfo
+    });
+
+    const resultChat = respChat.data.result;
+    console.log('\nFinal result:\n', resultChat.chatResult);
+
+  } catch (error) {
+    if (error.response) {
+      console.error(`❌ Request failed: ${error.response.status}`);
+      console.error(error.response.data);
+    } else {
+      console.error('❌ Error occurred:', error.message);
+    }
+  }
+})();
+</code></pre></details>
+
+<details><summary>PHP</summary>
+
+<pre><code class="language-php">&lt;?php
+
+$API_BASE_URL = "http://localhost:8080";
+$image_path = "./demo.jpg";
+$keys = ["Name"];
+
+$image_data = base64_encode(file_get_contents($image_path));
+
+$payload_visual = [
+    "file" => $image_data,
+    "fileType" => 1
+];
+$response_visual_raw = send_post_raw("$API_BASE_URL/chatocr-visual", $payload_visual);
+$response_visual = json_decode($response_visual_raw, true);
+if (!isset($response_visual["result"])) {
+    echo "chatocr-visual request error\n";
+    print_r($response_visual);
+    exit(1);
+}
+$result_visual_raw = json_decode($response_visual_raw, false)->result;
+$result_visual_arr = $response_visual["result"];
+
+foreach ($result_visual_arr["layoutParsingResults"] as $i => $res) {
+    echo "[$i] prunedResult:\n";
+    print_r($res["prunedResult"]);
+    if (!empty($res["outputImages"])) {
+        foreach ($res["outputImages"] as $img_name => $base64_img) {
+            $img_path = "{$img_name}_{$i}.jpg";
+            file_put_contents($img_path, base64_decode($base64_img));
+            echo "Output image saved at $img_path\n";
+        }
+    }
+}
+
+$payload_vector = [
+    "visualInfo" => $result_visual_raw->visualInfo
+];
+$response_vector_raw = send_post_raw("$API_BASE_URL/chatocr-vector", $payload_vector);
+$response_vector = json_decode($response_vector_raw, true);
+if (!isset($response_vector["result"])) {
+    echo "chatocr-vector request error\n";
+    print_r($response_vector);
+    exit(1);
+}
+$result_vector_raw = json_decode($response_vector_raw, false)->result;
+
+$payload_mllm = [
+    "image" => $image_data,
+    "keyList" => $keys
+];
+$response_mllm_raw = send_post_raw("$API_BASE_URL/chatocr-mllm", $payload_mllm);
+$response_mllm = json_decode($response_mllm_raw, true);
+if (!isset($response_mllm["result"])) {
+    echo "chatocr-mllm request error\n";
+    print_r($response_mllm);
+    exit(1);
+}
+$result_mllm_raw = json_decode($response_mllm_raw, false)->result;
+
+$payload_chat = [
+    "keyList" => $keys,
+    "visualInfo" => $result_visual_raw->visualInfo,
+    "useVectorRetrieval" => true,
+    "vectorInfo" => $result_vector_raw->vectorInfo,
+    "mllmPredictInfo" => $result_mllm_raw->mllmPredictInfo
+];
+$response_chat_raw = send_post_raw("$API_BASE_URL/chatocr-chat", $payload_chat);
+$response_chat = json_decode($response_chat_raw, true);
+if (!isset($response_chat["result"])) {
+    echo "chatocr-chat request error\n";
+    print_r($response_chat);
+    exit(1);
+}
+
+echo "Final result:\n";
+echo json_encode($response_chat["result"]["chatResult"], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . "\n";
+
+
+function send_post_raw($url, $data) {
+    $json_str = json_encode($data, JSON_UNESCAPED_UNICODE);
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_str);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    if ($response === false) {
+        echo "cURL error: " . curl_error($ch) . "\n";
+    }
+    curl_close($ch);
+    return $response;
+}
+?&gt;
+</code></pre></details>
 </details>
 <br/>
 
