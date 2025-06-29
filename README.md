@@ -1,106 +1,181 @@
 <div align="center">
   <p>
-      <img width="100%" src="./docs/images/Banner_cn.png" alt="PaddleOCR Banner"></a>
+      <img width="100%" src="./docs/images/Banner.png" alt="PaddleOCR Banner">
   </p>
 
 <!-- language -->
-中文 | [English](./README_en.md)
+English | [简体中文](./README_cn.md) | [繁體中文](./README_tcn.md) | [日本語](./README_ja.md) | [한국어](./README_ko.md) | [Français](./README_fr.md) | [Русский](./README_ru.md) | [Español](./README_es.md) | [العربية](./README_ar.md)
 
 <!-- icon -->
 
 [![stars](https://img.shields.io/github/stars/PaddlePaddle/PaddleOCR?color=ccf)](https://github.com/PaddlePaddle/PaddleOCR)
 [![Downloads](https://img.shields.io/pypi/dm/paddleocr)](https://pypi.org/project/PaddleOCR/)
-![python](https://img.shields.io/badge/python-3.8~3.12-aff.svg)
+![python](https://img.shields.io/badge/python-3.8～3.12-aff.svg)
 ![os](https://img.shields.io/badge/os-linux%2C%20win%2C%20mac-pink.svg)
 ![hardware](https://img.shields.io/badge/hardware-cpu%2C%20gpu%2C%20xpu%2C%20npu-yellow.svg)
 
 
-[![Website](https://img.shields.io/badge/Website-PaddleOCR-blue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmmRkdj0AAAAASUVORK5CYII=)](https://www.paddleocr.ai/)
 [![AI Studio](https://img.shields.io/badge/PP_OCRv5-AI_Studio-green)](https://aistudio.baidu.com/community/app/91660/webUI)
 [![AI Studio](https://img.shields.io/badge/PP_StructureV3-AI_Studio-green)](https://aistudio.baidu.com/community/app/518494/webUI)
 [![AI Studio](https://img.shields.io/badge/PP_ChatOCRv4-AI_Studio-green)](https://aistudio.baidu.com/community/app/518493/webUI)
 
 </div>
 
-## 🚀 简介
-PaddleOCR自发布以来凭借学术前沿算法和产业落地实践，受到了产学研各方的喜爱，并被广泛应用于众多知名开源项目，例如：Umi-OCR、OmniParser、MinerU、RAGFlow等，已成为广大开发者心中的开源OCR领域的首选工具。2025年5月20日，飞桨团队发布**PaddleOCR 3.0**，全面适配**飞桨框架3.0正式版**，进一步**提升文字识别精度**，支持**多文字类型识别**和**手写体识别**，满足大模型应用对**复杂文档高精度解析**的旺盛需求，结合**文心大模型4.5 Turbo**显著提升关键信息抽取精度，并新增**对昆仑芯、昇腾等国产硬件**的支持。
+## 🚀 Introduction
+Since its initial release, PaddleOCR has gained widespread acclaim across academia, industry, and research communities, thanks to its cutting-edge algorithms and proven performance in real-world applications. It's already powering popular open-source projects like Umi-OCR, OmniParser, MinerU, and RAGFlow, making it the go-to OCR toolkit for developers worldwide.
 
-PaddleOCR 3.0**新增**三大特色能力：
-- 全场景文字识别模型[PP-OCRv5](docs/version3.x/algorithm/PP-OCRv5/PP-OCRv5.md)：单模型支持五种文字类型和复杂手写体识别；整体识别精度相比上一代**提升13个百分点**。[在线体验](https://aistudio.baidu.com/community/app/91660/webUI)
-- 通用文档解析方案[PP-StructureV3](docs/version3.x/algorithm/PP-StructureV3/PP-StructureV3.md)：支持多场景、多版式 PDF 高精度解析，在公开评测集中**领先众多开源和闭源方案**。[在线体验](https://aistudio.baidu.com/community/app/518494/webUI)
-- 智能文档理解方案[PP-ChatOCRv4](docs/version3.x/algorithm/PP-ChatOCRv4/PP-ChatOCRv4.md)：原生支持文心大模型4.5 Turbo，精度相比上一代**提升15个百分点**。[在线体验](https://aistudio.baidu.com/community/app/518493/webUI)
+On May 20, 2025, the PaddlePaddle team unveiled PaddleOCR 3.0, fully compatible with the official release of the **PaddlePaddle 3.0** framework. This update further **boosts text-recognition accuracy**, adds support for **multiple text-type recognition** and **handwriting recognition**, and meets the growing demand from large-model applications for **high-precision parsing of complex documents**. When combined with the **ERNIE 4.5 Turbo**, it significantly enhances key-information extraction accuracy. PaddleOCR 3.0 also introduces support for Chinese Heterogeneous AI Accelerators such as **KUNLUNXIN** and **Ascend**. For the complete usage documentation, please refer to the [PaddleOCR 3.0 Documentation](https://paddlepaddle.github.io/PaddleOCR/latest/en/index.html).
 
-PaddleOCR 3.0除了提供优秀的模型库外，还提供好学易用的工具，覆盖模型训练、推理和服务化部署，方便开发者快速落地AI应用。
+Three Major New Features in PaddleOCR 3.0:
+- Universal-Scene Text Recognition Model [PP-OCRv5](./docs/version3.x/algorithm/PP-OCRv5/PP-OCRv5.en.md): A single model that handles five different text types plus complex handwriting. Overall recognition accuracy has increased by 13 percentage points over the previous generation. [Online Demo](https://aistudio.baidu.com/community/app/91660/webUI)
+
+- General Document-Parsing Solution [PP-StructureV3](./docs/version3.x/algorithm/PP-StructureV3/PP-StructureV3.en.md): Delivers high-precision parsing of multi-layout, multi-scene PDFs, outperforming many open- and closed-source solutions on public benchmarks. [Online Demo](https://aistudio.baidu.com/community/app/518494/webUI)
+
+- Intelligent Document-Understanding Solution [PP-ChatOCRv4](./docs/version3.x/algorithm/PP-ChatOCRv4/PP-ChatOCRv4.en.md): Natively powered by the ERNIE 4.5 Turbo, achieving 15 percentage points higher accuracy than its predecessor. [Online Demo](https://aistudio.baidu.com/community/app/518493/webUI)
+
+In addition to providing an outstanding model library, PaddleOCR 3.0 also offers user-friendly tools covering model training, inference, and service deployment, so developers can rapidly bring AI applications to production.
 <div align="center">
   <p>
-      <img width="100%" src="./docs/images/Arch_cn.png" alt="PaddleOCR Architecture"></a>
+      <img width="100%" src="./docs/images/Arch.png" alt="PaddleOCR Architecture">
   </p>
 </div>
 
 
-## 📣 最新动态
-🔥🔥2025.05.20: **PaddleOCR 3.0** 正式发布，包含：
-- **PP-OCRv5**: 全场景高精度文字识别
 
-   1. 🌐 单模型支持**五种**文字类型(**简体中文**、**繁体中文**、**中文拼音**、**英文**和**日文**)。
-   2. ✍️ 支持复杂**手写体**识别：复杂连笔、非规范字迹识别性能显著提升。
-   3. 🎯 整体识别精度提升 - 多种应用场景达到 SOTA 精度, 相比上一版本PP-OCRv4，识别精度**提升13个百分点**！
-
-- **PP-StructureV3**: 通用文档解析方案
-
-   1. 🧮 支持多场景 PDF 高精度解析，在 OmniDocBench 基准测试中**领先众多开源和闭源方案**。
-   2. 🧠 多项专精能力: **印章识别**、**图表转表格**、**嵌套公式/图片的表格识别**、**竖排文本解析**及**复杂表格结构分析**等。
+## 📣 Recent updates
 
 
-- **PP-ChatOCRv4**: 智能文档理解方案
-   1. 🔥 文档图像（PDF/PNG/JPG）关键信息提取精度相比上一代**提升15个百分点**！
-   2. 💻 原生支持**文心大模型4.5 Turbo**，还兼容 PaddleNLP、Ollama、vLLM 等工具部署的大模型。
-   3. 🤝 集成 [PP-DocBee2](https://github.com/PaddlePaddle/PaddleMIX/tree/develop/paddlemix/examples/ppdocbee2)，支持印刷文字、手写体文字、印章信息、表格、图表等常见的复杂文档信息抽取和理解的能力。
+#### **2025.06.29: Release of PaddleOCR 3.1.0**, includes:
+
+- **Key Models and Pipelines:**
+  - **Added PP-OCRv5 Multilingual Text Recognition Model**, which supports the training and inference process for text recognition models in 37 languages, including French, Spanish, Portuguese, Russian, Korean, etc. **Average accuracy improved by over 30%.** [Details](https://paddlepaddle.github.io/PaddleOCR/latest/en/version3.x/algorithm/PP-OCRv5/PP-OCRv5_multi_languages.html)
+  - Upgraded the **PP-Chart2Table model** in PP-StructureV3, further enhancing the capability of converting charts to tables. On internal custom evaluation sets, the metric (RMS-F1) **increased by 9.36 percentage points (71.24% -> 80.60%).**
+  - Newly launched **document translation pipeline, PP-DocTranslation, based on PP-StructureV3 and ERNIE 4.5 Turbo**, which supports the translation of Markdown format documents, various complex-layout PDF documents, and document images, with the results saved as Markdown format documents. [Details](https://paddlepaddle.github.io/PaddleOCR/latest/en/version3.x/pipeline_usage/PP-DocTranslation.html)
 
 
-## ⚡ 快速开始
-### 1. 在线体验
+- **New MCP server:** [Details](https://paddlepaddle.github.io/PaddleOCR/latest/en/version3.x/deployment/mcp_server.html)
+  - **Supports both OCR and PP-StructureV3 pipelines.**
+  - Supports three working modes: local Python library, AIStudio Community Cloud Service, and self-hosted service.
+  - Supports invoking local services via stdio and remote services via Streamable HTTP.
+
+- **Documentation Optimization:** Improved the descriptions in some user guides for a smoother reading experience.
+
+#### **2025.06.26: Release of PaddleOCR 3.0.3**, includes:
+
+  - Bug Fix: Resolved the issue where the `enable_mkldnn` parameter was not effective, restoring the default behavior of using MKL-DNN for CPU inference.
+
+#### 🔥🔥 **2025.06.19: Release of PaddleOCR 3.0.2**, includes:
+
+- **New Features:**
+
+  - The default download source has been changed from `BOS` to `HuggingFace`. Users can also change the environment variable `PADDLE_PDX_MODEL_SOURCE` to `BOS` to set the model download source back to Baidu Object Storage (BOS).
+  - Added service invocation examples for six languages—C++, Java, Go, C#, Node.js, and PHP—for pipelines like PP-OCRv5, PP-StructureV3, and PP-ChatOCRv4.
+  - Improved the layout partition sorting algorithm in the PP-StructureV3 pipeline, enhancing the sorting logic for complex vertical layouts to deliver better results.
+  - Enhanced model selection logic: when a language is specified but a model version is not, the system will automatically select the latest model version supporting that language. 
+  - Set a default upper limit for MKL-DNN cache size to prevent unlimited growth, while also allowing users to configure cache capacity.
+  - Updated default configurations for high-performance inference to support Paddle MKL-DNN acceleration and optimized the logic for automatic configuration selection for smarter choices.
+  - Adjusted the logic for obtaining the default device to consider the actual support for computing devices by the installed Paddle framework, making program behavior more intuitive.
+  - Added Android example for PP-OCRv5. [Details](https://paddlepaddle.github.io/PaddleOCR/latest/en/version3.x/deployment/on_device_deployment.html).
+
+- **Bug Fixes:**
+
+  - Fixed an issue with some CLI parameters in PP-StructureV3 not taking effect.
+  - Resolved an issue where `export_paddlex_config_to_yaml` would not function correctly in certain cases.
+  - Corrected the discrepancy between the actual behavior of `save_path` and its documentation description.
+  - Fixed potential multithreading errors when using MKL-DNN in basic service deployment.
+  - Corrected channel order errors in image preprocessing for the Latex-OCR model.
+  - Fixed channel order errors in saving visualized images within the text recognition module.
+  - Resolved channel order errors in visualized table results within PP-StructureV3 pipeline.
+  - Fixed an overflow issue in the calculation of `overlap_ratio` under extremely special circumstances in the PP-StructureV3 pipeline.
+
+- **Documentation Improvements:**
+
+  - Updated the description of the `enable_mkldnn` parameter in the documentation to accurately reflect the program's actual behavior.
+  - Fixed errors in the documentation regarding the `lang` and `ocr_version` parameters.
+  - Added instructions for exporting production line configuration files via CLI.
+  - Fixed missing columns in the performance data table for PP-OCRv5.
+  - Refined benchmark metrics for PP-StructureV3 across different configurations.
+
+- **Others:**
+
+  - Relaxed version restrictions on dependencies like numpy and pandas, restoring support for Python 3.12.
+
+<details>
+    <summary><strong>History Log</strong></summary>
+
+#### **🔥🔥 2025.06.05: Release of PaddleOCR 3.0.1, includes:**
+
+- **Optimisation of certain models and model configurations:**
+  - Updated the default model configuration for PP-OCRv5, changing both detection and recognition from mobile to server models. To improve default performance in most scenarios, the parameter `limit_side_len` in the configuration has been changed from 736 to 64.
+  - Added a new text line orientation classification model `PP-LCNet_x1_0_textline_ori` with an accuracy of 99.42%. The default text line orientation classifier for OCR, PP-StructureV3, and PP-ChatOCRv4 pipelines has been updated to this model.
+  - Optimised the text line orientation classification model `PP-LCNet_x0_25_textline_ori`, improving accuracy by 3.3 percentage points to a current accuracy of 98.85%.
+
+- **Optimizations and fixes for some issues in version 3.0.0, [details](https://paddlepaddle.github.io/PaddleOCR/latest/en/update/update.html)**
+
+🔥🔥2025.05.20: Official Release of **PaddleOCR v3.0**, including:
+- **PP-OCRv5**: High-Accuracy Text Recognition Model for All Scenarios - Instant Text from Images/PDFs.
+   1. 🌐 Single-model support for **five** text types - Seamlessly process **Simplified Chinese, Traditional Chinese, Simplified Chinese Pinyin, English** and **Japanese** within a single model.
+   2. ✍️ Improved **handwriting recognition**: Significantly better at complex cursive scripts and non-standard handwriting.
+   3. 🎯 **13-point accuracy gain** over PP-OCRv4, achieving state-of-the-art performance across a variety of real-world scenarios.
+
+- **PP-StructureV3**: General-Purpose Document Parsing – Unleash SOTA Images/PDFs Parsing for Real-World Scenarios! 
+   1. 🧮 **High-Accuracy multi-scene PDF parsing**, leading both open- and closed-source solutions on the OmniDocBench benchmark.
+   2. 🧠 Specialized capabilities include **seal recognition**, **chart-to-table conversion**, **table recognition with nested formulas/images**, **vertical text document parsing**, and **complex table structure analysis**.
+
+- **PP-ChatOCRv4**: Intelligent Document Understanding – Extract Key Information, not just text from Images/PDFs.
+   1. 🔥 **15-point accuracy gain** in key-information extraction on PDF/PNG/JPG files over the previous generation.
+   2. 💻 Native support for **ERNIE 4.5 Turbo**, with compatibility for large-model deployments via PaddleNLP, Ollama, vLLM, and more.
+   3. 🤝 Integrated [PP-DocBee2](https://github.com/PaddlePaddle/PaddleMIX/tree/develop/paddlemix/examples/ppdocbee2), enabling extraction and understanding of printed text, handwriting, seals, tables, charts, and other common elements in complex documents.
+
+[History Log](https://paddlepaddle.github.io/PaddleOCR/latest/en/update/update.html)
+
+</details>
+
+## ⚡ Quick Start
+### 1. Run online demo 
 [![AI Studio](https://img.shields.io/badge/PP_OCRv5-AI_Studio-green)](https://aistudio.baidu.com/community/app/91660/webUI)
 [![AI Studio](https://img.shields.io/badge/PP_StructureV3-AI_Studio-green)](https://aistudio.baidu.com/community/app/518494/webUI)
 [![AI Studio](https://img.shields.io/badge/PP_ChatOCRv4-AI_Studio-green)](https://aistudio.baidu.com/community/app/518493/webUI)
 
-### 2. 本地安装
+### 2. Installation
 
-请参考[安装指南](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/develop/install/pip/linux-pip.html)完成**PaddlePaddle 3.0**的安装，然后安装paddleocr。
+Install PaddlePaddle refer to [Installation Guide](https://www.paddlepaddle.org.cn/en/install/quick?docurl=/documentation/docs/en/develop/install/pip/linux-pip_en.html), after then, install the PaddleOCR toolkit.
 
 ```bash
-# 安装 paddleocr
-pip install paddleocr==3.0.0
+# Install paddleocr
+pip install paddleocr
 ```
 
-### 3. 命令行方式推理
+### 3. Run inference by CLI
 ```bash
-# 运行 PP-OCRv5 推理
-paddleocr ocr -i https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/general_ocr_002.png --use_doc_orientation_classify False --use_doc_unwarping False --use_textline_orientation False 
+# Run PP-OCRv5 inference
+paddleocr ocr -i https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/general_ocr_002.png --use_doc_orientation_classify False --use_doc_unwarping False --use_textline_orientation False  
 
-# 运行 PP-StructureV3 推理
+# Run PP-StructureV3 inference
 paddleocr pp_structurev3 -i https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/pp_structure_v3_demo.png --use_doc_orientation_classify False --use_doc_unwarping False
 
-# 运行 PP-ChatOCRv4 推理前，需要先获得千帆API Key
+# Get the Qianfan API Key at first, and then run PP-ChatOCRv4 inference
 paddleocr pp_chatocrv4_doc -i https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/vehicle_certificate-1.png -k 驾驶室准乘人数 --qianfan_api_key your_api_key --use_doc_orientation_classify False --use_doc_unwarping False 
 
-# 查看 "paddleocr ocr" 详细参数
+# Get more information about "paddleocr ocr"
 paddleocr ocr --help
 ```
-### 4. API方式推理
 
-**4.1 PP-OCRv5 示例**
+### 4. Run inference by API
+**4.1 PP-OCRv5 Example**
 ```python
+# Initialize PaddleOCR instance
 from paddleocr import PaddleOCR
-# 初始化 PaddleOCR 实例
 ocr = PaddleOCR(
     use_doc_orientation_classify=False,
     use_doc_unwarping=False,
     use_textline_orientation=False)
-# 对示例图像执行 OCR 推理 
+
+# Run OCR inference on a sample image 
 result = ocr.predict(
     input="https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/general_ocr_002.png")
-# 可视化结果并保存 json 结果
+
+# Visualize the results and save the JSON results
 for res in result:
     res.print()
     res.save_to_img("output")
@@ -108,7 +183,7 @@ for res in result:
 ```
 
 <details>
-    <summary><strong>4.2 PP-StructureV3 示例</strong></summary>
+    <summary><strong>4.2 PP-StructureV3 Example</strong></summary>
 
 ```python
 from pathlib import Path
@@ -122,20 +197,19 @@ pipeline = PPStructureV3(
 # For Image
 output = pipeline.predict(
     input="https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/pp_structure_v3_demo.png",
-    )
+)
 
-# 可视化结果并保存 json 结果
+# Visualize the results and save the JSON results
 for res in output:
     res.print() 
     res.save_to_json(save_path="output") 
-    res.save_to_markdown(save_path="output") 
+    res.save_to_markdown(save_path="output")           
 ```
 
 </details>
 
-
 <details>
-   <summary><strong>4.3 PP-ChatOCRv4 示例</strong></summary>
+   <summary><strong>4.3 PP-ChatOCRv4 Example</strong></summary>
 
 ```python
 from paddleocr import PPChatOCRv4Doc
@@ -170,7 +244,7 @@ visual_predict_res = pipeline.visual_predict(
 
 mllm_predict_info = None
 use_mllm = False
-# 如果使用多模态大模型，需要启动本地 mllm 服务，可以参考文档：https://github.com/PaddlePaddle/PaddleX/blob/release/3.0/docs/pipeline_usage/tutorials/vlm_pipelines/doc_understanding.md 进行部署，并更新 mllm_chat_bot_config 配置。
+# If a multimodal large model is used, the local mllm service needs to be started. You can refer to the documentation: https://github.com/PaddlePaddle/PaddleX/blob/release/3.0/docs/pipeline_usage/tutorials/vlm_pipelines/doc_understanding.en.md performs deployment and updates the mllm_chat_bot_config configuration.
 if use_mllm:
     mllm_chat_bot_config = {
         "module_name": "chat_bot",
@@ -208,50 +282,51 @@ print(chat_result)
 
 </details>
 
+### 5. Chinese Heterogeneous AI Accelerators
+- [Huawei Ascend](https://paddlepaddle.github.io/PaddleOCR/latest/version3.x/other_devices_support/paddlepaddle_install_NPU.html)
+- [KUNLUNXIN](https://paddlepaddle.github.io/PaddleOCR/latest/version3.x/other_devices_support/paddlepaddle_install_XPU.html)
 
-### 5. **国产化硬件使用**
-- [昆仑芯安装指南](https://paddlepaddle.github.io/PaddleOCR/latest/version3.x/other_devices_support/paddlepaddle_install_XPU.html)
-- [昇腾安装指南](https://paddlepaddle.github.io/PaddleOCR/latest/version3.x/other_devices_support/paddlepaddle_install_NPU.html)
-  
-## ⛰️ 进阶指南
-- [PP-OCRv5 使用教程](https://paddlepaddle.github.io/PaddleOCR/latest/version3.x/pipeline_usage/OCR.html)
-- [PP-StructureV3 使用教程](https://paddlepaddle.github.io/PaddleOCR/latest/version3.x/pipeline_usage/PP-StructureV3.html)
-- [PP-ChatOCRv4 使用教程](https://paddlepaddle.github.io/PaddleOCR/latest/version3.x/pipeline_usage/PP-ChatOCRv4.html)
+## ⛰️ Advanced Tutorials
+- [PP-OCRv5 Tutorial](https://paddlepaddle.github.io/PaddleOCR/latest/version3.x/pipeline_usage/OCR.html)
+- [PP-StructureV3 Tutorial](https://paddlepaddle.github.io/PaddleOCR/latest/version3.x/pipeline_usage/PP-StructureV3.html)
+- [PP-ChatOCRv4 Tutorial](https://paddlepaddle.github.io/PaddleOCR/latest/version3.x/pipeline_usage/PP-ChatOCRv4.html)
 
-## 🔄 效果展示
+## 🔄 Quick Overview of Execution Results
 
 <div align="center">
   <p>
-       <img width="100%" src="./docs/images/demo.gif" alt="PP-OCRv5 Demo"></a>
+     <img width="100%" src="./docs/images/demo.gif" alt="PP-OCRv5 Demo">
   </p>
 </div>
 
 <div align="center">
   <p>
-      <img width="100%" src="./docs/images/blue_v3.gif" alt="PP-StructureV3 Demo"></a>
+     <img width="100%" src="./docs/images/blue_v3.gif" alt="PP-StructureV3 Demo">
   </p>
 </div>
 
-## 👩‍👩‍👧‍👦 开发者社区
+## 👩‍👩‍👧‍👦 Community
 
-| 扫码关注飞桨公众号 | 扫码加入技术交流群 |
+| PaddlePaddle WeChat official account |  Join the tech discussion group |
 | :---: | :---: |
 | <img src="https://raw.githubusercontent.com/cuicheng01/PaddleX_doc_images/refs/heads/main/images/paddleocr/README/qrcode_for_paddlepaddle_official_account.jpg" width="150"> | <img src="https://raw.githubusercontent.com/cuicheng01/PaddleX_doc_images/refs/heads/main/images/paddleocr/README/qr_code_for_the_questionnaire.jpg" width="150"> |
 
-## 🏆 使用 PaddleOCR 的优秀项目
-PaddleOCR 的发展离不开社区贡献！💗衷心感谢所有开发者、合作伙伴与贡献者！
-| 项目名称 | 简介 |
-| ------------ | ----------- |
-| [RAGFlow](https://github.com/infiniflow/ragflow) <a href="https://github.com/infiniflow/ragflow"><img src="https://img.shields.io/github/stars/infiniflow/ragflow"></a>|基于RAG的AI工作流引擎|
-| [MinerU](https://github.com/opendatalab/MinerU) <a href="https://github.com/opendatalab/MinerU"><img src="https://img.shields.io/github/stars/opendatalab/MinerU"></a>|多类型文档转换Markdown工具|
-| [Umi-OCR](https://github.com/hiroi-sora/Umi-OCR) <a href="https://github.com/hiroi-sora/Umi-OCR"><img src="https://img.shields.io/github/stars/hiroi-sora/Umi-OCR"></a>|开源批量离线OCR软件|
-| [OmniParser](https://github.com/microsoft/OmniParser)<a href="https://github.com/microsoft/OmniParser"><img src="https://img.shields.io/github/stars/microsoft/OmniParser"></a> |基于纯视觉的GUI智能体屏幕解析工具|
-| [QAnything](https://github.com/netease-youdao/QAnything)<a href="https://github.com/netease-youdao/QAnything"><img src="https://img.shields.io/github/stars/netease-youdao/QAnything"></a> |基于任意内容的问答系统|
-| [PDF-Extract-Kit](https://github.com/opendatalab/PDF-Extract-Kit) <a href="https://github.com/opendatalab/PDF-Extract-Kit"><img src="https://img.shields.io/github/stars/opendatalab/PDF-Extract-Kit"></a>|高效复杂PDF文档提取工具包|
-| [Dango-Translator](https://github.com/PantsuDango/Dango-Translator)<a href="https://github.com/PantsuDango/Dango-Translator"><img src="https://img.shields.io/github/stars/PantsuDango/Dango-Translator"></a> |屏幕实时翻译工具|
-| [更多项目](./awesome_projects.md) | |
 
-## 👩‍👩‍👧‍👦 贡献者
+## 😃 Awesome Projects Leveraging PaddleOCR
+PaddleOCR wouldn't be where it is today without its incredible community! 💗 A massive thank you to all our longtime partners, new collaborators, and everyone who's poured their passion into PaddleOCR — whether we've named you or not. Your support fuels our fire!
+
+| Project Name | Description |
+| ------------ | ----------- |
+| [RAGFlow](https://github.com/infiniflow/ragflow) <a href="https://github.com/infiniflow/ragflow"><img src="https://img.shields.io/github/stars/infiniflow/ragflow"></a>|RAG engine based on deep document understanding.|
+| [MinerU](https://github.com/opendatalab/MinerU) <a href="https://github.com/opendatalab/MinerU"><img src="https://img.shields.io/github/stars/opendatalab/MinerU"></a>|Multi-type Document to Markdown Conversion Tool|
+| [Umi-OCR](https://github.com/hiroi-sora/Umi-OCR) <a href="https://github.com/hiroi-sora/Umi-OCR"><img src="https://img.shields.io/github/stars/hiroi-sora/Umi-OCR"></a>|Free, Open-source, Batch Offline OCR Software.|
+| [OmniParser](https://github.com/microsoft/OmniParser)<a href="https://github.com/microsoft/OmniParser"><img src="https://img.shields.io/github/stars/microsoft/OmniParser"></a> |OmniParser: Screen Parsing tool for Pure Vision Based GUI Agent.|
+| [QAnything](https://github.com/netease-youdao/QAnything)<a href="https://github.com/netease-youdao/QAnything"><img src="https://img.shields.io/github/stars/netease-youdao/QAnything"></a> |Question and Answer based on Anything.|
+| [PDF-Extract-Kit](https://github.com/opendatalab/PDF-Extract-Kit) <a href="https://github.com/opendatalab/PDF-Extract-Kit"><img src="https://img.shields.io/github/stars/opendatalab/PDF-Extract-Kit"></a>|A powerful open-source toolkit designed to efficiently extract high-quality content from complex and diverse PDF documents.|
+| [Dango-Translator](https://github.com/PantsuDango/Dango-Translator)<a href="https://github.com/PantsuDango/Dango-Translator"><img src="https://img.shields.io/github/stars/PantsuDango/Dango-Translator"></a> |Recognize text on the screen, translate it and show the translation results in real time.|
+| [Learn more projects](./awesome_projects.md) | [More projects based on PaddleOCR](./awesome_projects.md)|
+
+## 👩‍👩‍👧‍👦 Contributors
 
 <a href="https://github.com/PaddlePaddle/PaddleOCR/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=PaddlePaddle/PaddleOCR&max=400&columns=20"  width="800"/>
@@ -263,10 +338,10 @@ PaddleOCR 的发展离不开社区贡献！💗衷心感谢所有开发者、合
 [![Star History Chart](https://api.star-history.com/svg?repos=PaddlePaddle/PaddleOCR&type=Date)](https://star-history.com/#PaddlePaddle/PaddleOCR&Date)
 
 
-## 📄 许可协议
-本项目的发布受[Apache 2.0 license](LICENSE)许可认证。
+## 📄 License
+This project is released under the [Apache 2.0 license](LICENSE).
 
-## 🎓 学术引用
+## 🎓 Citation
 
 ```
 @misc{paddleocr2020,
