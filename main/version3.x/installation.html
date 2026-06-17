@@ -438,7 +438,7 @@ You're not viewing the latest version.
   
     
   
-  PP-OCRv5
+  PP-OCRv6
 
         </a>
       </li>
@@ -1042,8 +1042,6 @@ You're not viewing the latest version.
       
         
       
-        
-      
     
     
     
@@ -1069,7 +1067,7 @@ You're not viewing the latest version.
   <span class="md-ellipsis">
     
   
-    PP-OCRv5
+    PP-OCRv6
   
 
     
@@ -1085,7 +1083,7 @@ You're not viewing the latest version.
             <span class="md-nav__icon md-icon"></span>
             
   
-    PP-OCRv5
+    PP-OCRv6
   
 
           </label>
@@ -1126,42 +1124,14 @@ You're not viewing the latest version.
   
   
     <li class="md-nav__item">
-      <a href="algorithm/PP-OCRv5/PP-OCRv5.html" class="md-nav__link">
+      <a href="algorithm/PP-OCRv6/PP-OCRv6.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    PP-OCRv5简介
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="algorithm/PP-OCRv5/PP-OCRv5_multi_languages.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PP-OCRv5多语种文字识别
+    PP-OCRv6简介
   
 
     
@@ -2578,6 +2548,8 @@ You're not viewing the latest version.
       
         
       
+        
+      
     
     
     
@@ -2632,14 +2604,42 @@ You're not viewing the latest version.
   
   
     <li class="md-nav__item">
-      <a href="inference_deployment/cross_platform/on_device_deployment.html" class="md-nav__link">
+      <a href="inference_deployment/cross_platform/android_deployment.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    端侧部署
+    Android 部署
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="inference_deployment/cross_platform/ios_deployment.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iOS 部署
   
 
     
@@ -5429,7 +5429,7 @@ You're not viewing the latest version.
 <h1 id="_1">安装<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <h2 id="1-paddleocr-python">1. 安装 PaddleOCR Python 库及可选依赖<a class="headerlink" href="#1-paddleocr-python" title="Permanent link">&para;</a></h2>
 <p>本节说明如何按需安装<code>paddleocr</code> 分发包，按能力域启用的可选依赖组，以及安装推理引擎。这条路径适用于在本地调用预训练产线完成推理，或是使用文档格式转换等辅助功能。<strong>模型训练与模型导出</strong>见第 2 节，与上述安装路径相互独立。</p>
-<p><strong>Python 版本要求</strong>：<code>paddleocr</code> 本体与 <code>doc2md</code> 依赖组支持 Python 3.8 及以上；其他可选依赖组（<code>doc-parser</code>、<code>ie</code>、<code>trans</code>、<code>all</code>）受上游依赖限制，需要 Python 3.9 及以上。</p>
+<p><strong>Python 版本要求</strong>：<code>paddleocr</code> 本体与 <code>doc2md</code> 依赖组支持 Python 3.8 及以上；其他可选依赖组（<code>doc-parser</code>、<code>ie</code>、<code>trans</code>、<code>all</code> 等）受上游依赖限制，需要 Python 3.9 及以上。</p>
 <h3 id="install-paddleocr">1.1 安装 <code>paddleocr</code><a class="headerlink" href="#install-paddleocr" title="Permanent link">&para;</a></h3>
 <p>从 PyPI 安装最新版本的 <code>paddleocr</code>：</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 仅需要通用 OCR 与文档图像预处理等默认能力</span>
